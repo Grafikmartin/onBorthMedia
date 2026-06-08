@@ -1,0 +1,45 @@
+.video-section {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  margin-top: 100vh; /* Platzhalter für den fixierten Aufmacher */
+  overflow: visible; /* Video darf bei fixed herausragen */
+}
+
+.video-wrapper {
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+.video-stack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.video-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  pointer-events: none;
+}
+
+.video-element.visible {
+  opacity: 1;
+}
+
+.video-element.exiting {
+  opacity: 0;
+  z-index: 1;
+}
+
+.video-element.entering {
+  opacity: 1;
+  z-index: 2;
+}

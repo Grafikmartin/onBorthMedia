@@ -1,0 +1,98 @@
+.leistungen-section {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  margin-top: 0;
+  overflow: visible;
+}
+
+.leistungen-wrapper {
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+.leistungen-text {
+  text-align: left;
+  width: calc(47vw - 4rem);
+  max-width: calc(100vw - 49vw - 4vw);
+  padding: 0 2rem var(--spacing-xl, 4rem) 0;
+  left: 49vw;
+  margin-top: var(--spacing-xl, 4rem);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.leistungen-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text-primary, #000000);
+  margin: 0 0 1rem 0;
+}
+
+.leistungen-subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 600;
+  color: var(--text-primary, #000000);
+  margin: 2rem 0 0.5rem 0;
+}
+
+.leistungen-subtitle:first-of-type {
+  margin-top: 0;
+}
+
+.leistungen-text p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--text-primary, #000000);
+  margin: 0 0 1rem 0;
+}
+
+.leistungen-scroll-area {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.leistungen-scroll-area::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .leistungen-text {
+    left: 10vw;
+    width: 80vw;
+    max-width: 80vw;
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .leistungen-title {
+    font-size: 1.25rem;
+  }
+
+  .leistungen-subtitle {
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .leistungen-text p {
+    font-size: 0.9rem;
+  }
+
+  .leistungen-wrapper {
+    z-index: 500 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .leistungen-title {
+    font-size: 1.1rem;
+  }
+
+  .leistungen-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .leistungen-text p {
+    font-size: 0.75rem;
+  }
+}

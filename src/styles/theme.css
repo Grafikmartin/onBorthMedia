@@ -1,0 +1,66 @@
+/* Style Guide - BB Farbpalette */
+
+:root {
+  /* Mint-Farben */
+  --color-signal: #4dc3b5;
+  --color-coral: #7dd3c4;
+  --color-sky: #a0dfd1;
+  --color-gold: #c5ebe2;
+  --color-mint-5: #d8f2eb;
+  --color-mint-6: #ebf8f4;
+
+  /* Hintergrund - Light Mode */
+  --bg-primary: #ffffff;
+  --bg-secondary: #ffffff;
+  
+  /* Text - Light Mode */
+  --text-primary: #000000;
+  --text-secondary: rgba(0, 0, 0, 0.8);
+  
+  /* Icon & Scroll - Light Mode */
+  --icon-color: #000000;
+  --scroll-color: #000000;
+  
+  /* Linker Rand für Aufmacher-Punkte und Hamburger-Menü (einheitlich 10vw) */
+  --content-start: 10vw;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 6rem;
+  
+  /* Typography */
+  --font-family-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-size-hero: clamp(3rem, 8vw, 8rem);
+  --font-weight-bold: 700;
+  --font-weight-medium: 500;
+}
+
+/* Dark Mode */
+.dark-mode {
+  /* Hintergrund - Dark Mode */
+  --bg-primary: #000000;
+  --bg-secondary: #000000;
+  
+  /* Text - Dark Mode */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  
+  /* Icon & Scroll - Dark Mode */
+  --icon-color: #ffffff;
+  --scroll-color: #ffffff;
+}
+
+/* Utility Classes für Farben */
+.color-signal { color: var(--color-signal); }
+.color-coral { color: var(--color-coral); }
+.color-sky { color: var(--color-sky); }
+.color-gold { color: var(--color-gold); }
+
+.bg-signal { background-color: var(--color-signal); }
+.bg-coral { background-color: var(--color-coral); }
+.bg-sky { background-color: var(--color-sky); }
+.bg-gold { background-color: var(--color-gold); }
+
