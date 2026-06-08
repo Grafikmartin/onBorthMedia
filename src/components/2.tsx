@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './2.css'
 import SectionDots from './SectionDots'
+import ShowcaseSlider, { WEBAPP_SHOWCASE } from './ShowcaseSlider'
 
 function Two({ id }: { id?: string }) {
   const [scale, setScale] = useState(0.7)
@@ -78,6 +79,7 @@ function Two({ id }: { id?: string }) {
         <p>Von der Konzeption über UX und Entwicklung bis zum Launch begleiten wir komplexe Webprojekte aus einer Hand.</p>
         <h3 className="leistungen-subtitle">Digitale Lösungen</h3>
         <p>Dashboards, Kundenportale, interne Tools und datengetriebene Anwendungen – skalierbar und zukunftssicher.</p>
+        <ShowcaseSlider items={WEBAPP_SHOWCASE} variant="dark" />
       </div>
       </div>
       </div>

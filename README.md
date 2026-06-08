@@ -10,7 +10,9 @@ npm install
 npm run dev
 ```
 
-App: **http://localhost:5173/onborthmedia/**
+App: **http://localhost:5173/onBorthMedia/**
+
+Live: **https://grafikmartin.github.io/onBorthMedia/**
 
 ## Build
 

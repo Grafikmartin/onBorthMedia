@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './1.css'
 import SectionDots from './SectionDots'
+import ShowcaseSlider, { WEBSITE_SHOWCASE } from './ShowcaseSlider'
 
 function One({ id }: { id?: string }) {
   const [scale, setScale] = useState(0.7)
@@ -75,6 +76,7 @@ function One({ id }: { id?: string }) {
         <p>Webseiten, die nicht nur gut aussehen, sondern Vertrauen schaffen, Orientierung geben und Kunden gewinnen.</p>
         <p>Von der ersten Idee bis zur fertigen Online-Präsenz: klar strukturiert, responsiv und auf deine Zielgruppe ausgerichtet.</p>
         <p>Ob Unternehmensseite, Portfolio oder Landingpage – wir setzen dein digitales Schaufenster professionell um.</p>
+        <ShowcaseSlider items={WEBSITE_SHOWCASE} variant="light" />
       </div>
       </div>
     </section>

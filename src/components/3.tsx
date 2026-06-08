@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './3.css'
 import SectionDots from './SectionDots'
+import ShowcaseSlider, { DESIGN_SHOWCASE } from './ShowcaseSlider'
 
 function Three({ id }: { id?: string }) {
   const [visibleParagraphs, setVisibleParagraphs] = useState<boolean[]>([false, false, false])
@@ -137,6 +138,7 @@ function Three({ id }: { id?: string }) {
         >
           Von Logoentwicklung über Styleguides bis zur konsistenten Umsetzung in Web und Print – alles aus einer Hand.
         </p>
+          <ShowcaseSlider items={DESIGN_SHOWCASE} variant="muted" />
       </div>
       </div>
       </div>
