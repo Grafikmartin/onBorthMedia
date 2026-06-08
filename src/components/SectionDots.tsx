@@ -9,14 +9,13 @@ const CIRCLES_WIDTH_VW = 34
 const DIAMETER_VW = CIRCLES_WIDTH_VW / (COLS + 0.1 * (COLS - 1))
 const GAP_VW = DIAMETER_VW * 0.1
 
-/** Wie Aufmacher: Farbpalette für die Kreise mit Transparenz */
-const getCircleMintColors = (): string[] => [
-  'rgba(77, 195, 181, 1)',
-  'rgba(125, 211, 196, 0.9)',
-  'rgba(160, 223, 209, 0.8)',
-  'rgba(197, 235, 226, 0.7)',
-  'rgba(216, 242, 235, 0.6)',
-  'rgba(235, 248, 244, 0.5)',
+const getCircleBrandColors = (): string[] => [
+  'rgba(230, 39, 39, 1)',
+  'rgba(230, 39, 39, 0.85)',
+  'rgba(230, 39, 39, 0.65)',
+  'rgba(0, 0, 0, 0.55)',
+  'rgba(255, 255, 255, 0.9)',
+  'rgba(255, 255, 255, 0.6)',
 ]
 
 function isLightColorArea(index: number): boolean {
@@ -60,7 +59,7 @@ function isOutermostArea(index: number): boolean {
 }
 
 function getInitialColors(): string[] {
-  const circleColors = getCircleMintColors()
+  const circleColors = getCircleBrandColors()
   const lightestColors = [circleColors[4], circleColors[5]]
   const outerColors = circleColors.slice(1)
   const allColorsWithWhite = [...circleColors, 'transparent']
@@ -86,7 +85,7 @@ function SectionDots() {
     const changeColor = (index: number) => {
       setCircleColors(prev => {
         const newColors = [...prev]
-        const circleColors = getCircleMintColors()
+        const circleColors = getCircleBrandColors()
         const lightestColors = [circleColors[4], circleColors[5]]
         const outerColors = circleColors.slice(1)
         const withWhite = [...circleColors, 'transparent']
@@ -147,7 +146,7 @@ function SectionDots() {
             width: `${DIAMETER_VW}vw`,
             height: `${DIAMETER_VW}vw`,
             borderRadius: '50%',
-            backgroundColor: circleColors[index] || getCircleMintColors()[0],
+            backgroundColor: circleColors[index] || getCircleBrandColors()[0],
             transition: 'background-color 1s ease-in-out',
           }}
         />

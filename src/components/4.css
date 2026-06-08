@@ -71,7 +71,7 @@
   margin-bottom: 4rem;
   align-self: flex-start;
   padding: 0.6rem 1.5rem;
-  background: #d8f2eb;
+  background: rgba(230, 39, 39, 0.1);
   border: 1px solid transparent;
   border-radius: 12px;
   color: var(--text-primary, #000000);
@@ -83,8 +83,22 @@
 }
 
 .kontakt-anfahrt-btn:hover {
-  background-color: #5bc4b5;
+  background-color: #E62727;
   color: #ffffff;
+}
+
+.kontakt-lead {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 600;
+  color: var(--text-primary, #000000);
+  margin: 0 0 1rem 0;
+}
+
+.kontakt-note {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  line-height: 1.6;
+  color: var(--text-secondary, rgba(0, 0, 0, 0.8));
+  margin: 1rem 0 0 0;
 }
 
 .kontakt-map-container {

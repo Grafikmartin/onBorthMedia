@@ -51,9 +51,9 @@ function App() {
         </div>
       </section>
       <Video />
-      <One id="praxis" />
-      <Two id="leistungen" />
-      <Three id="ueber-mich" />
+      <One id="webseiten" />
+      <Two id="webapps" />
+      <Three id="design" />
       <Four id="kontakt" />
       <Footer />
       {showScrollHint && <ScrollHint />}

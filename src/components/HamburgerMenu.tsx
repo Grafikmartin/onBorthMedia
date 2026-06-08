@@ -2,9 +2,10 @@ import { useState, useRef, useEffect } from 'react'
 import './HamburgerMenu.css'
 
 const MENU_ITEMS = [
-  { label: 'Die Praxis', id: 'praxis' },
-  { label: 'Leistungen', id: 'leistungen' },
-  { label: 'Über mich', id: 'ueber-mich' },
+  { label: 'Webseiten', id: 'webseiten' },
+  { label: 'Webapps', id: 'webapps' },
+  { label: 'Design', id: 'design' },
+  { label: 'Referenz', id: 'vettierio' },
   { label: 'Kontakt', id: 'kontakt' },
   { label: 'Impressum', action: 'impressum' as const },
 ]
@@ -34,7 +35,6 @@ function HamburgerMenu({ onImpressumClick }: HamburgerMenuProps) {
     }
   }, [])
 
-  // Wenn Menü offen: scrollender Inhalt über Aufmacher, damit Video/Inhalt durch transparenten Menühintergrund sichtbar ist
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add('hamburger-menu-open')

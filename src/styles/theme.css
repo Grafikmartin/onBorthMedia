@@ -1,66 +1,53 @@
-/* Style Guide - BB Farbpalette */
+/* Style Guide - OnBorthMedia */
 
 :root {
-  /* Mint-Farben */
-  --color-signal: #4dc3b5;
-  --color-coral: #7dd3c4;
-  --color-sky: #a0dfd1;
-  --color-gold: #c5ebe2;
-  --color-mint-5: #d8f2eb;
-  --color-mint-6: #ebf8f4;
+  /* Markenfarben */
+  --color-signal: #E62727;
+  --color-primary: #E62727;
+  --color-coral: #E62727;
+  --color-sky: rgba(230, 39, 39, 0.75);
+  --color-gold: rgba(230, 39, 39, 0.5);
+  --color-accent-light: rgba(230, 39, 39, 0.15);
+  --color-surface: #f5f5f5;
 
-  /* Hintergrund - Light Mode */
+  /* Hintergrund */
   --bg-primary: #ffffff;
   --bg-secondary: #ffffff;
-  
-  /* Text - Light Mode */
+
+  /* Text */
   --text-primary: #000000;
   --text-secondary: rgba(0, 0, 0, 0.8);
-  
-  /* Icon & Scroll - Light Mode */
+
+  /* Icon & Scroll */
   --icon-color: #000000;
   --scroll-color: #000000;
-  
-  /* Linker Rand für Aufmacher-Punkte und Hamburger-Menü (einheitlich 10vw) */
+
   --content-start: 10vw;
 
-  /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
   --spacing-lg: 4rem;
   --spacing-xl: 6rem;
-  
-  /* Typography */
+
   --font-family-primary: 'Inter', system-ui, -apple-system, sans-serif;
   --font-size-hero: clamp(3rem, 8vw, 8rem);
   --font-weight-bold: 700;
   --font-weight-medium: 500;
 }
 
-/* Dark Mode */
 .dark-mode {
-  /* Hintergrund - Dark Mode */
   --bg-primary: #000000;
   --bg-secondary: #000000;
-  
-  /* Text - Dark Mode */
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.8);
-  
-  /* Icon & Scroll - Dark Mode */
   --icon-color: #ffffff;
   --scroll-color: #ffffff;
 }
 
-/* Utility Classes für Farben */
 .color-signal { color: var(--color-signal); }
+.color-primary { color: var(--color-primary); }
 .color-coral { color: var(--color-coral); }
-.color-sky { color: var(--color-sky); }
-.color-gold { color: var(--color-gold); }
 
 .bg-signal { background-color: var(--color-signal); }
-.bg-coral { background-color: var(--color-coral); }
-.bg-sky { background-color: var(--color-sky); }
-.bg-gold { background-color: var(--color-gold); }
-
+.bg-primary-brand { background-color: var(--color-primary); }

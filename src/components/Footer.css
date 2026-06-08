@@ -9,7 +9,7 @@
   width: 100%;
   padding: 0.75em var(--spacing-md, 2rem);
   text-align: center;
-  background: var(--color-coral, #7dd3c4);
+  background: #000000;
   border-radius: 12px 12px 0 0;
   position: relative;
   z-index: 2001;
@@ -19,7 +19,7 @@
 .footer-legal {
   font-size: 0.75rem;
   margin: 0 0 0.5em 0;
-  color: var(--text-primary, #2a2a2a);
+  color: #ffffff;
 }
 
 .footer-legal-link {
@@ -28,13 +28,13 @@
   padding: 0;
   font: inherit;
   cursor: pointer;
-  color: var(--text-primary, #2a2a2a);
+  color: #ffffff;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .footer-legal-link:hover {
-  color: var(--text-secondary, rgba(0, 0, 0, 0.8));
+  color: #E62727;
 }
 
 /* Overlay für Impressum / Datenschutz / Cookie – zentral, sanft einblendend */
@@ -64,7 +64,7 @@
   max-height: 85vh;
   overflow-y: auto;
   background: var(--bg-primary, #ffffff);
-  color: var(--text-primary, #2a2a2a);
+  color: var(--text-primary, #000000);
   border-radius: 12px;
   padding: 1.75rem 2rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
@@ -91,29 +91,29 @@
 }
 
 .footer-legal-panel-body a {
-  color: var(--color-signal, #4dc3b5);
+  color: #E62727;
   text-decoration: underline;
 }
 
 .footer-legal-panel-body a:hover {
-  color: var(--color-coral, #7dd3c4);
+  color: #E62727;
 }
 
 .footer-legal-close {
   display: block;
   margin-top: 1.5rem;
   padding: 0.5rem 1.25rem;
-  background: var(--color-coral, #7dd3c4);
+  background: #E62727;
   border: none;
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  color: var(--text-primary, #2a2a2a);
+  color: #ffffff;
 }
 
 .footer-legal-close:hover {
-  background: var(--color-signal, #4dc3b5);
+  background: #000000;
 }
 
 @keyframes footer-legal-fade-in {
@@ -140,7 +140,7 @@
 .footer-text {
   font-size: 0.9rem;
   font-weight: 400;
-  color: var(--text-primary, #2a2a2a);
+  color: #ffffff;
   margin: 0;
   text-transform: lowercase;
 }

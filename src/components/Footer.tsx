@@ -6,11 +6,10 @@ const LEGAL_IMPRESSUM = {
   content: (
     <>
       <p><strong>Angaben gemäß § 5 TMG</strong></p>
-      <p>Musterpraxis Beispiel<br />Musterstraße 123<br />12345 Musterstadt</p>
-      <p><strong>Kontakt</strong><br />Telefon: +49 40 123 456 78<br />E-Mail: kontakt@beispiel.de</p>
-      <p><strong>Berufsbezeichnung und berufsrechtliche Regelungen</strong><br />Berufsbezeichnung: Heilpraktiker für Psychotherapie (verliehen in der Bundesrepublik Deutschland). Zuständige Kammer: [Name der Kammer]. Verliehen in: Hamburg.</p>
+      <p>OnBorthMedia<br />[Adresse]<br />[PLZ Ort]</p>
+      <p><strong>Kontakt</strong><br />E-Mail: kontakt@onborthmedia.de</p>
       <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</strong><br />[Name], [Adresse]</p>
-      <p>Dies ist ein Platzhaltertext. Bitte ersetzen Sie ihn durch Ihre rechtlich korrekten Angaben.</p>
+      <p>Platzhaltertext – bitte durch rechtlich korrekte Angaben ersetzen.</p>
     </>
   ),
 }
@@ -20,12 +19,11 @@ const LEGAL_DATENSCHUTZ = {
   content: (
     <>
       <p><strong>1. Verantwortliche Stelle</strong></p>
-      <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist [Name und Anschrift]. Kontaktmöglichkeiten finden Sie im Impressum.</p>
+      <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist OnBorthMedia. Kontaktmöglichkeiten finden Sie im Impressum.</p>
       <p><strong>2. Erhebung und Speicherung personenbezogener Daten</strong></p>
-      <p>Beim Besuch dieser Website werden durch den Browser automatisch Informationen an den Server übermittelt. Diese umfassen unter anderem Datum und Uhrzeit des Abrufs, Browsertyp und -version sowie die zuvor aufgerufene Seite. Eine Zuordnung zu einer bestimmten Person ist mit diesen Daten allein nicht möglich.</p>
+      <p>Beim Besuch dieser Website werden durch den Browser automatisch Informationen an den Server übermittelt. Diese umfassen unter anderem Datum und Uhrzeit des Abrufs, Browsertyp und -version sowie die zuvor aufgerufene Seite.</p>
       <p><strong>3. Ihre Rechte</strong></p>
-      <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie ein Recht auf Datenübertragbarkeit. Bei Fragen wenden Sie sich bitte an die im Impressum genannte Kontaktadresse.</p>
-      <p>Dies ist ein Platzhaltertext. Bitte ergänzen Sie ihn anhand Ihrer tatsächlichen Datenverarbeitung und ggf. mit Hilfe eines Anwalts.</p>
+      <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten. Bei Fragen wenden Sie sich bitte an die im Impressum genannte Kontaktadresse.</p>
     </>
   ),
 }
@@ -35,9 +33,7 @@ const LEGAL_COOKIE = {
   content: (
     <>
       <p>Diese Website setzt selbst keine Cookies.</p>
-      <p><strong>Google Maps</strong><br />Im Bereich „Kontakt“ ist eine Karte von Google Maps eingebunden. Beim Aufruf dieser Seite lädt Ihr Browser Inhalte von Google. Dabei kann Google Cookies auf Ihrem Gerät setzen (z. B. für die Kartenfunktion oder Einstellungen). Wir haben keinen Zugriff auf diese Cookies.</p>
-      <p>Weitere Informationen zur Datenverarbeitung durch Google finden Sie in der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von Google</a>. Sie können Cookies in Ihren Browsereinstellungen ablehnen oder löschen; die Karte kann dann eingeschränkt oder nicht nutzbar sein.</p>
-      <p>Mit der Nutzung dieser Website und dem Aufruf der Kontaktseite mit Karte erklären Sie sich mit der genannten Übermittlung von Daten an Google einverstanden.</p>
+      <p>Bei der Nutzung externer Dienste (z. B. eingebettete Inhalte) können Drittanbieter Cookies setzen. Informationen dazu finden Sie in den jeweiligen Datenschutzhinweisen der Anbieter.</p>
     </>
   ),
 }
@@ -88,7 +84,7 @@ function Footer() {
           {' | '}
           <button type="button" className="footer-legal-link" onClick={() => setLegalOpen('cookie')}>Cookie-Richtlinie</button>
         </p>
-        <p className="footer-text">Designed and developed by<br /><strong className="footer-bold">media on borth</strong></p>
+        <p className="footer-text">OnBorthMedia – gemeinsam auf Kurs.</p>
       </div>
 
       {legalOpen && (

@@ -4,11 +4,10 @@ import './ImpressumDrawer.css'
 const IMPRESSUM_CONTENT = (
   <>
     <p><strong>Angaben gemäß § 5 TMG</strong></p>
-    <p>Musterpraxis Beispiel<br />Musterstraße 123<br />12345 Musterstadt</p>
-    <p><strong>Kontakt</strong><br />Telefon: +49 40 123 456 78<br />E-Mail: kontakt@beispiel.de</p>
-    <p><strong>Berufsbezeichnung und berufsrechtliche Regelungen</strong><br />Berufsbezeichnung: Heilpraktiker für Psychotherapie (verliehen in der Bundesrepublik Deutschland). Zuständige Kammer: [Name der Kammer]. Verliehen in: Hamburg.</p>
+    <p>OnBorthMedia<br />[Adresse]<br />[PLZ Ort]</p>
+    <p><strong>Kontakt</strong><br />E-Mail: kontakt@onborthmedia.de</p>
     <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</strong><br />[Name], [Adresse]</p>
-    <p>Dies ist ein Platzhaltertext. Bitte ersetzen Sie ihn durch Ihre rechtlich korrekten Angaben.</p>
+    <p>Platzhaltertext – bitte durch rechtlich korrekte Angaben ersetzen.</p>
   </>
 )
 

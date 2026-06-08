@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import './3.css'
 import SectionDots from './SectionDots'
-import aboutImage from '../assets/image.png'
+import logoSvg from '../assets/onBorthMedia.svg'
 
 function Three({ id }: { id?: string }) {
-  const [visibleParagraphs, setVisibleParagraphs] = useState<boolean[]>([false, false, false, false, false])
-  const [showMore, setShowMore] = useState(false)
+  const [visibleParagraphs, setVisibleParagraphs] = useState<boolean[]>([false, false, false])
   const [scale, setScale] = useState(0.7)
   const [isScrolling, setIsScrolling] = useState(false)
   const [isSticky, setIsSticky] = useState(false)
@@ -47,40 +46,14 @@ function Three({ id }: { id?: string }) {
         }
       })
     }
-  }, [showMore])
+  }, [])
 
-  useEffect(() => {
-    if (showMore) {
-      setTimeout(() => {
-        setVisibleParagraphs(prev => {
-          const newState = [...prev]
-          newState[2] = true
-          newState[3] = true
-          newState[4] = true
-          return newState
-        })
-      }, 100)
-    }
-  }, [showMore])
-
-  // Absätze sichtbar machen, wenn Sektion aktiv ist (IntersectionObserver kann bei fixierter Ansicht scheitern)
   useEffect(() => {
     if (isSticky) {
-      setVisibleParagraphs(prev => {
-        const newState = [...prev]
-        newState[0] = true
-        newState[1] = true
-        if (showMore) {
-          newState[2] = true
-          newState[3] = true
-          newState[4] = true
-        }
-        return newState
-      })
+      setVisibleParagraphs([true, true, true])
     }
-  }, [isSticky, showMore])
+  }, [isSticky])
 
-  // Scale-Animation beim Scrollen
   useEffect(() => {
     let scrollTimeout: ReturnType<typeof setTimeout>
     const viewportHeight = window.innerHeight
@@ -120,7 +93,7 @@ function Three({ id }: { id?: string }) {
     <section ref={aboutSectionRef} id={id} className="about-section">
       <div
         className="about-spacer"
-        style={{ minHeight: showMore ? '280vh' : '100vh' }}
+        style={{ minHeight: '100vh' }}
         aria-hidden="true"
       />
       <div
@@ -134,7 +107,7 @@ function Three({ id }: { id?: string }) {
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'flex-start',
-          backgroundColor: 'var(--color-coral, #7dd3c4)',
+          backgroundColor: 'var(--color-surface, #f5f5f5)',
           padding: 'var(--spacing-xl, 4rem) 0',
           transform: isSticky ? 'none' : `scale(${scale})`,
           transformOrigin: 'top center',
@@ -145,55 +118,31 @@ function Three({ id }: { id?: string }) {
       >
       <SectionDots />
       <div className="about-content about-content-scrollable">
-        <img 
-          src={aboutImage} 
-          alt="Benjamin Borth" 
+        <img
+          src={logoSvg}
+          alt="OnBorthMedia"
           className="about-image"
         />
         <div className="about-text">
-          <h2 className="about-title">Über mich</h2>
-        <p 
+          <h2 className="about-title">Design</h2>
+        <p
           ref={(el) => { paragraphRefs.current[0] = el }}
           className={visibleParagraphs[0] ? 'visible' : ''}
         >
-          Benjamin Borth – seit über sieben Jahren begleite ich als Heilpraktiker für Psychotherapie und Yogatrainer Menschen zu mehr Ruhe, Klarheit und Lebensfreude.
+          Ein starker Auftritt beginnt nicht erst bei der Website. Logo, Farben, Typografie und Gestaltung sorgen für Wiedererkennung.
         </p>
-        <p 
+        <p
           ref={(el) => { paragraphRefs.current[1] = el }}
           className={visibleParagraphs[1] ? 'visible' : ''}
         >
-          Mit eigener Familie weiß ich, wie anspruchsvoll der Alltag sein kann.
+          Corporate Design schafft eine visuelle Sprache, die dein Unternehmen klar positioniert – online und offline.
         </p>
-        {showMore && (
-          <>
-            <p 
-              ref={(el) => { paragraphRefs.current[2] = el }}
-              className={visibleParagraphs[2] ? 'visible' : ''}
-            >
-              Ich verbinde Hypnosetherapie und Gesprächstherapie mit Yoga und Yogatherapie.
-            </p>
-            <p 
-              ref={(el) => { paragraphRefs.current[3] = el }}
-              className={visibleParagraphs[3] ? 'visible' : ''}
-            >
-              Hypnose und Gesprächstherapie lösen Blockaden und eröffnen neue Perspektiven, Yogatherapie vertieft die Prozesse durch körperlich-geistigen Ausgleich.
-            </p>
-            <p 
-              ref={(el) => { paragraphRefs.current[4] = el }}
-              className={visibleParagraphs[4] ? 'visible' : ''}
-            >
-              Mein Ziel: ein geschützter Raum, in dem Veränderung möglich wird und Sie neue Wege entwickeln können.
-            </p>
-          </>
-        )}
-        {!showMore && (
-          <button 
-            className="more-button"
-            onClick={() => setShowMore(true)}
-          >
-            mehr
-          </button>
-        )}
+        <p
+          ref={(el) => { paragraphRefs.current[2] = el }}
+          className={visibleParagraphs[2] ? 'visible' : ''}
+        >
+          Von Logoentwicklung über Styleguides bis zur konsistenten Umsetzung in Web und Print – alles aus einer Hand.
+        </p>
       </div>
       </div>
       </div>

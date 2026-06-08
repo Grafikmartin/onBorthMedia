@@ -57,7 +57,8 @@ function Two({ id }: { id?: string }) {
           flexDirection: 'column',
           alignItems: 'stretch',
           justifyContent: 'flex-start',
-          backgroundColor: '#ffffff',
+          backgroundColor: '#000000',
+          color: '#ffffff',
           padding: 'var(--spacing-xl, 4rem) 0',
           transform: isSticky ? 'none' : `scale(${scale})`,
           transformOrigin: 'top center',
@@ -72,13 +73,15 @@ function Two({ id }: { id?: string }) {
         style={{ flex: 1, minHeight: 0, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}
       >
       <div className="leistungen-text">
-        <h2 className="leistungen-title">Leistungen</h2>
-        <h3 className="leistungen-subtitle">Hypnosetherapie</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <h3 className="leistungen-subtitle">Gesprächstherapie</h3>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <h3 className="leistungen-subtitle">Yoga und Meditation</h3>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        <h2 className="leistungen-title">Webapps</h2>
+        <p>Individuelle Anwendungen, Portale und digitale Prozesse – maßgeschneidert für dein Geschäftsmodell.</p>
+        <p>Von der Konzeption über UX und Entwicklung bis zum Launch begleiten wir komplexe Webprojekte aus einer Hand.</p>
+        <h3 className="leistungen-subtitle">Digitale Lösungen</h3>
+        <p>Dashboards, Kundenportale, interne Tools und datengetriebene Anwendungen – skalierbar und zukunftssicher.</p>
+        <div id="vettierio" className="leistungen-reference">
+          <h3 className="leistungen-subtitle">Referenz: Vettierio</h3>
+          <p>Mit Vettierio wurde bereits eine umfangreiche Webapp für Tiergesundheit umgesetzt – ein Beispiel dafür, wie digitale Produkte komplexe Anforderungen elegant lösen können.</p>
+        </div>
       </div>
       </div>
       </div>

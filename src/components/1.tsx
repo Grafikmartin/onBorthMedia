@@ -1,30 +1,11 @@
 import { useState, useEffect } from 'react'
 import './1.css'
 import SectionDots from './SectionDots'
-import praxisImage1 from '../assets/image copy 2.png'
-import praxisImage2 from '../assets/image copy 3.png'
-import praxisImage3 from '../assets/image copy 4.png'
-import praxisImage4 from '../assets/image copy.png'
-
-const PRAXIS_IMAGES = [praxisImage1, praxisImage2, praxisImage3, praxisImage4]
 
 function One({ id }: { id?: string }) {
   const [scale, setScale] = useState(0.7)
   const [isScrolling, setIsScrolling] = useState(false)
   const [isSticky, setIsSticky] = useState(false)
-  const [imageIndex, setImageIndex] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsTransitioning(true)
-      setTimeout(() => {
-        setImageIndex((prev) => (prev + 1) % PRAXIS_IMAGES.length)
-        setIsTransitioning(false)
-      }, 1200)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
 
   useEffect(() => {
     let scrollTimeout: ReturnType<typeof setTimeout>
@@ -79,7 +60,7 @@ function One({ id }: { id?: string }) {
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'flex-start',
-          backgroundColor: 'var(--color-coral, #7dd3c4)',
+          backgroundColor: '#ffffff',
           padding: 'var(--spacing-xl, 4rem) 0',
           transform: isSticky ? 'none' : `scale(${scale})`,
           transformOrigin: 'top center',
@@ -90,27 +71,10 @@ function One({ id }: { id?: string }) {
       >
       <SectionDots />
       <div className="einfuehrungstext-text einfuehrungstext-text-scrollable">
-        <h2 className="einfuehrungstext-title">Praxis</h2>
-        <div className="einfuehrungstext-images">
-          {PRAXIS_IMAGES.map((src, i) => {
-            const nextIndex = (imageIndex + 1) % PRAXIS_IMAGES.length
-            const isActive = i === imageIndex && !isTransitioning
-            const isEntering = isTransitioning && i === nextIndex
-            const isExiting = isTransitioning && i === imageIndex
-            const show = isActive || isEntering || isExiting
-            return (
-              <img
-                key={i}
-                src={src}
-                alt="Praxis"
-                className={`einfuehrungstext-image ${show ? 'visible' : ''} ${isEntering ? 'entering' : ''} ${isExiting ? 'exiting' : ''}`}
-              />
-            )
-          })}
-        </div>
-        <p>In meiner Praxis begleite ich dich mit Hypnose und Gesprächstherapie zu mehr Ruhe, Klarheit und Lebensfreude.</p>
-        <p>In einem geschützten Raum bist du willkommen, so wie du bist.</p>
-        <p>Yoga und Meditation können die therapeutische Arbeit auf Wunsch ergänzen.</p>
+        <h2 className="einfuehrungstext-title">Webseiten</h2>
+        <p>Webseiten, die nicht nur gut aussehen, sondern Vertrauen schaffen, Orientierung geben und Kunden gewinnen.</p>
+        <p>Von der ersten Idee bis zur fertigen Online-Präsenz: klar strukturiert, responsiv und auf deine Zielgruppe ausgerichtet.</p>
+        <p>Ob Unternehmensseite, Portfolio oder Landingpage – wir setzen dein digitales Schaufenster professionell um.</p>
       </div>
       </div>
     </section>
