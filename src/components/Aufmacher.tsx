@@ -2,10 +2,29 @@ import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import '../App.css'
 import './Aufmacher.css'
-import logoSvg from '../assets/onBorthMedia.svg'
+import LogoWeisserPunkt from './LogoWeisserPunkt'
 
 const TITLE_LINE1 = 'Webseiten, Apps und Design aus einer Hand.';
 const TITLE_LINE2 = 'Gemeinsam auf Kurs zur digitalen Präsenz.';
+const TITLE_LINE1_BREAK = 'Webseiten, Apps und Design'.length;
+const TITLE_LINE2_BREAK = 'Gemeinsam auf Kurs'.length;
+
+function renderTypedLine(
+  text: string,
+  visibleCount: number,
+  breakAfter: number,
+  keyPrefix: string,
+) {
+  return text.split('').map((char, i) => (
+    <span key={`${keyPrefix}-${i}`}>
+      {i === breakAfter && visibleCount > breakAfter && <br />}
+      <span style={{ visibility: i < visibleCount ? 'visible' : 'hidden' }}>{char}</span>
+      {i === visibleCount - 1 && visibleCount > 0 && visibleCount < text.length && (
+        <span className="aufmacher-cursor">|</span>
+      )}
+    </span>
+  ));
+}
 
 const COLS = 20;
 const ROWS = 9;
@@ -48,9 +67,7 @@ function Aufmacher() {
   }, []);
 
   const logoElement = typeof document !== 'undefined' && createPortal(
-    <img
-      src={logoSvg}
-      alt="OnBorthMedia"
+    <LogoWeisserPunkt
       className="aufmacher-logo"
       style={{
         position: 'fixed',
@@ -114,27 +131,13 @@ function Aufmacher() {
         {visibleCount.titleLine1 === 0 && (
           <span className="aufmacher-cursor">|</span>
         )}
-        {TITLE_LINE1.split('').map((char, i) => (
-          <span key={`t1-${i}`}>
-            <span style={{ visibility: i < visibleCount.titleLine1 ? 'visible' : 'hidden' }}>{char}</span>
-            {i === visibleCount.titleLine1 - 1 && visibleCount.titleLine1 > 0 && visibleCount.titleLine1 < TITLE_LINE1.length && (
-              <span className="aufmacher-cursor">|</span>
-            )}
-          </span>
-        ))}
+        {renderTypedLine(TITLE_LINE1, visibleCount.titleLine1, TITLE_LINE1_BREAK, 't1')}
       </div>
       <div className="aufmacher-title" style={{ width: '100%', maxWidth: '100%', fontSize: '0.55em', fontWeight: 200, letterSpacing: '0.02em', marginTop: '0.25em', marginLeft: 'calc(0.15em - 0.05vw)', lineHeight: 1.4, textAlign: 'left', whiteSpace: 'normal', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
         {visibleCount.titleLine1 >= TITLE_LINE1.length && visibleCount.titleLine2 === 0 && (
           <span className="aufmacher-cursor">|</span>
         )}
-        {TITLE_LINE2.split('').map((char, i) => (
-          <span key={`t2-${i}`}>
-            <span style={{ visibility: i < visibleCount.titleLine2 ? 'visible' : 'hidden' }}>{char}</span>
-            {i === visibleCount.titleLine2 - 1 && visibleCount.titleLine2 > 0 && visibleCount.titleLine2 < TITLE_LINE2.length && (
-              <span className="aufmacher-cursor">|</span>
-            )}
-          </span>
-        ))}
+        {renderTypedLine(TITLE_LINE2, visibleCount.titleLine2, TITLE_LINE2_BREAK, 't2')}
       </div>
     </div>,
     document.body
