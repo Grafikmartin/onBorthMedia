@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import './Video.css'
-import videoSrc1 from '../assets/22183-712840599_medium.mp4'
-import videoSrc2 from '../assets/18420-292228405_small.mp4'
-import videoSrc3 from '../assets/110790-688648716_medium.mp4'
+import VideoGrid from './VideoGrid'
+import videoSrc from '../assets/mb.mp4'
 
-const VIDEO_SOURCES = [videoSrc1, videoSrc2, videoSrc3]
+const VIDEO_SOURCES = [videoSrc]
 
 function Video() {
   const [scale, setScale] = useState(0.7)
@@ -126,6 +125,8 @@ function Video() {
             )
           })}
         </div>
+        <div className="video-vignette" aria-hidden="true" />
+        <VideoGrid />
       </div>
     </section>
   )

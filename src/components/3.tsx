@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import './3.css'
 import SectionDots from './SectionDots'
-import logoSvg from '../assets/onBorthMedia.svg'
 
 function Three({ id }: { id?: string }) {
   const [visibleParagraphs, setVisibleParagraphs] = useState<boolean[]>([false, false, false])
@@ -118,11 +117,6 @@ function Three({ id }: { id?: string }) {
       >
       <SectionDots />
       <div className="about-content about-content-scrollable">
-        <img
-          src={logoSvg}
-          alt="OnBorthMedia"
-          className="about-image"
-        />
         <div className="about-text">
           <h2 className="about-title">Design</h2>
         <p

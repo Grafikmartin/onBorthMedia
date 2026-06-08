@@ -34,3 +34,8 @@ declare module '*.mp4' {
   const value: string
   export default value
 }
+
+declare module '*.mkv' {
+  const value: string
+  export default value
+}

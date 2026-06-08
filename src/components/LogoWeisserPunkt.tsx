@@ -1,7 +1,9 @@
 import { useState, useEffect, type CSSProperties } from 'react'
 
+const BRAND_RED = '#E62727'
+
 const DOT_COLORS = [
-  '#E62727',
+  BRAND_RED,
   '#ffffff',
   '#FFE600',
   '#00E8FF',
@@ -10,6 +12,8 @@ const DOT_COLORS = [
   '#FF6B00',
   '#4DFF4D',
 ]
+
+const OTHER_DOT_COLORS = DOT_COLORS.filter((c) => c !== BRAND_RED)
 
 const I_STEM_PATH = 'M257.043 39.582V18.7483H261.666V39.582H257.043Z'
 const I_DOT_PATH =
@@ -21,11 +25,14 @@ type LogoWeisserPunktProps = {
 }
 
 function LogoWeisserPunkt({ className, style }: LogoWeisserPunktProps) {
-  const [dotColor, setDotColor] = useState(DOT_COLORS[0])
+  const [dotColor, setDotColor] = useState(BRAND_RED)
 
   useEffect(() => {
     const pickNext = (current: string) => {
-      const options = DOT_COLORS.filter((c) => c !== current)
+      if (Math.random() < 0.25 && current !== BRAND_RED) {
+        return BRAND_RED
+      }
+      const options = OTHER_DOT_COLORS.filter((c) => c !== current)
       return options[Math.floor(Math.random() * options.length)]
     }
 

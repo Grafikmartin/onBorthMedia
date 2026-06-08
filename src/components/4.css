@@ -71,10 +71,10 @@
   margin-bottom: 4rem;
   align-self: flex-start;
   padding: 0.6rem 1.5rem;
-  background: rgba(230, 39, 39, 0.1);
+  background: #000000;
   border: 1px solid transparent;
   border-radius: 12px;
-  color: var(--text-primary, #000000);
+  color: #ffffff;
   font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   text-decoration: none;
   text-transform: none;

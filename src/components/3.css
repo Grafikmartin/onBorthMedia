@@ -51,17 +51,6 @@
   display: none;
 }
 
-.about-image {
-  width: min(280px, 60vw);
-  height: auto;
-  max-width: 100%;
-  border-radius: 0;
-  object-fit: contain;
-  display: block;
-  margin-bottom: 1rem;
-  flex-shrink: 0;
-}
-
 .about-text {
   text-align: left;
   width: 100%;
@@ -124,13 +113,6 @@
     font-size: 0.9rem;
   }
 
-  .about-image {
-    width: min(200px, 70vw);
-    height: auto;
-    max-width: 100%;
-    margin-bottom: 0.5rem;
-  }
-
   .more-button {
     font-size: 0.85rem;
     padding: 0.4rem 1rem;
@@ -150,12 +132,6 @@
 
   .about-text p {
     font-size: 0.75rem;
-  }
-
-  .about-image {
-    width: min(160px, 75vw);
-    height: auto;
-    max-width: 100%;
   }
 
   .more-button {

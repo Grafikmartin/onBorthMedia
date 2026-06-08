@@ -6,7 +6,7 @@ import LogoWeisserPunkt from './LogoWeisserPunkt'
 
 const TITLE_LINE1 = 'Webseiten, Apps und Design aus einer Hand.';
 const TITLE_LINE2 = 'Gemeinsam auf Kurs zur digitalen Präsenz.';
-const TITLE_LINE1_BREAK = 'Webseiten, Apps und Design'.length;
+const TITLE_LINE1_BREAK = 'Webseiten, Apps und '.length;
 const TITLE_LINE2_BREAK = 'Gemeinsam auf Kurs'.length;
 
 function renderTypedLine(

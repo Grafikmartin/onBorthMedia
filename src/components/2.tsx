@@ -78,10 +78,6 @@ function Two({ id }: { id?: string }) {
         <p>Von der Konzeption über UX und Entwicklung bis zum Launch begleiten wir komplexe Webprojekte aus einer Hand.</p>
         <h3 className="leistungen-subtitle">Digitale Lösungen</h3>
         <p>Dashboards, Kundenportale, interne Tools und datengetriebene Anwendungen – skalierbar und zukunftssicher.</p>
-        <div id="vettierio" className="leistungen-reference">
-          <h3 className="leistungen-subtitle">Referenz: Vettierio</h3>
-          <p>Mit Vettierio wurde bereits eine umfangreiche Webapp für Tiergesundheit umgesetzt – ein Beispiel dafür, wie digitale Produkte komplexe Anforderungen elegant lösen können.</p>
-        </div>
       </div>
       </div>
       </div>

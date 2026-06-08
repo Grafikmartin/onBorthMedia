@@ -5,7 +5,6 @@ const MENU_ITEMS = [
   { label: 'Webseiten', id: 'webseiten' },
   { label: 'Webapps', id: 'webapps' },
   { label: 'Design', id: 'design' },
-  { label: 'Referenz', id: 'vettierio' },
   { label: 'Kontakt', id: 'kontakt' },
   { label: 'Impressum', action: 'impressum' as const },
 ]
