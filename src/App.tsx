@@ -12,7 +12,7 @@ import ScrollHint from './components/ScrollHint'
 import Footer from './components/Footer'
 import CursorFollower from './components/CursorFollower'
 import ImpressumDrawer from './components/ImpressumDrawer'
-import Loader from './components/Loader'
+import Loader, { LOADER_MIN_DURATION_MS } from './components/Loader'
 
 function App() {
   const [canScroll, setCanScroll] = useState(false)
@@ -37,16 +37,28 @@ function App() {
   }, [canScroll])
 
   useEffect(() => {
+    const startedAt = Date.now()
+    let hideTimeout: ReturnType<typeof setTimeout> | undefined
+    let unmountTimeout: ReturnType<typeof setTimeout> | undefined
+
     const finishLoading = () => {
-      setIsLoading(false)
-      window.setTimeout(() => setShowLoader(false), 400)
+      const remaining = Math.max(0, LOADER_MIN_DURATION_MS - (Date.now() - startedAt))
+      hideTimeout = window.setTimeout(() => {
+        setIsLoading(false)
+        unmountTimeout = window.setTimeout(() => setShowLoader(false), 400)
+      }, remaining)
     }
 
     if (document.readyState === 'complete') {
       finishLoading()
     } else {
-      window.addEventListener('load', finishLoading)
-      return () => window.removeEventListener('load', finishLoading)
+      window.addEventListener('load', finishLoading, { once: true })
+    }
+
+    return () => {
+      window.removeEventListener('load', finishLoading)
+      if (hideTimeout) window.clearTimeout(hideTimeout)
+      if (unmountTimeout) window.clearTimeout(unmountTimeout)
     }
   }, [])
 

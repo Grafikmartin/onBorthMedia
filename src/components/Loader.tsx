@@ -1,5 +1,8 @@
 import './Loader.css'
 
+// 0,3s Delay des 3. Balls + ein voller Hüpfer (0,5s × 2 via alternate) + Puffer
+export const LOADER_MIN_DURATION_MS = 1500
+
 type LoaderProps = {
   hiding?: boolean
 }
