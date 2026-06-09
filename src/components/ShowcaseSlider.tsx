@@ -1,13 +1,12 @@
 import './ShowcaseSlider.css'
 import getwizeImage from '../assets/getwize.ai.png'
 import mbSoundImage from '../assets/mb-sound.jpg'
-import benjaminBorthVideo from '../assets/BildschirmaufnahmeBB.mov'
+import benjaminBorthVideo from '../assets/BildschirmaufnahmeBB-kl.mov'
 import architekturMVideo from '../assets/ArchitekturM.mp4'
 import portfolioVideo from '../assets/Portfolio.mov'
 import wetterVideo from '../assets/wetter-copy.mkv'
 import pingpongVideo from '../assets/pingpong.mkv'
-import radioPulseVideo from '../assets/RadioPulse.mkv'
-import spaceVideo from '../assets/space.mkv'
+import radioPulseVideo from '../assets/RadioPulse-kl.mov'
 
 export type ShowcaseItem = {
   id: string
@@ -57,7 +56,6 @@ function ShowcaseSlider({ items, variant = 'light' }: ShowcaseSliderProps) {
                   autoPlay
                 />
               )}
-              <span className="showcase-slider-card-label">{item.label}</span>
             </div>
           </div>
         ))}
@@ -78,16 +76,6 @@ export const WEBAPP_SHOWCASE: ShowcaseItem[] = [
   { id: 'app-wetter', label: 'Wetter', video: wetterVideo },
   { id: 'app-pingpong', label: 'Ping Pong', video: pingpongVideo },
   { id: 'app-radio', label: 'Radio Pulse', video: radioPulseVideo },
-  { id: 'app-space', label: 'Space', video: spaceVideo },
-]
-
-export const DESIGN_SHOWCASE: ShowcaseItem[] = [
-  { id: 'des-1', label: 'Logo', accent: '#000000' },
-  { id: 'des-2', label: 'Corporate Design', accent: '#E62727' },
-  { id: 'des-3', label: 'Typografie', accent: '#f0f0f0' },
-  { id: 'des-4', label: 'Styleguide', accent: '#ffffff' },
-  { id: 'des-5', label: 'Visitenkarte', accent: '#1a1a1a' },
-  { id: 'des-6', label: 'Markenauftritt', accent: '#E62727' },
 ]
 
 export default ShowcaseSlider

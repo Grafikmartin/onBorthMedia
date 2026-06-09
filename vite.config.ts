@@ -5,7 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.mkv'],
-  base: '/onBorthMedia/',
+  // GitHub Pages: /onBorthMedia/ — Vercel: Root /
+  base: process.env.VERCEL ? '/' : '/onBorthMedia/',
   server: {
     port: 5173,
   },

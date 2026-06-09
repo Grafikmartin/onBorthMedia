@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './Video.css'
 import VideoGrid from './VideoGrid'
-import videoSrc from '../assets/mb.mp4'
+import videoSrc from '../assets/mb-kl3.mov'
 import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
 
 const VIDEO_SOURCES = [videoSrc]

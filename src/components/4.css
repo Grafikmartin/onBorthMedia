@@ -101,12 +101,19 @@
   color: #ffffff;
 }
 
-.kontakt-slogan {
+.kontakt-logo {
   display: block;
-  width: min(42vw, 299px);
+  width: min(33.6vw, 239px);
   max-width: 100%;
   height: auto;
-  margin: 2.75rem 0 1rem 0;
+  margin: 2.75rem 0 0.5rem 0;
+}
+
+.kontakt-tagline {
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  line-height: 1.4;
+  color: var(--text-primary, #000000);
+  margin: 0 0 1rem 0;
 }
 
 .kontakt-note {
@@ -172,8 +179,12 @@
     padding-left: calc(1.35rem - 15px);
   }
 
-  .kontakt-slogan {
-    width: min(72vw, 299px);
+  .kontakt-logo {
+    width: min(57.6vw, 239px);
+  }
+
+  .kontakt-tagline {
+    font-size: 1.1rem;
     margin-bottom: 0.75rem;
   }
 

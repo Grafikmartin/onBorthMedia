@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import './4.css'
 import SectionDots from './SectionDots'
 import { SocialLinks } from './SocialLinks'
-import obmSlogan from '../assets/OBM-Slogan.svg'
+import obmLogo from '../assets/OBM-Logo.svg'
 import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
 
 function Four({ id }: { id?: string }) {
@@ -37,10 +37,11 @@ function Four({ id }: { id?: string }) {
           <div className="kontakt-text kontakt-content-scrollable">
             <h2 className="kontakt-title">Kontakt</h2>
             <img
-              src={obmSlogan}
-              alt="OnBorthMedia – Gemeinsam auf Kurs."
-              className="kontakt-slogan"
+              src={obmLogo}
+              alt="OnBorthMedia"
+              className="kontakt-logo"
             />
+            <p className="kontakt-tagline">Gemeinsam auf Kurs.</p>
             <p className="kontakt-address">
               Erzähl mir von deinem Vorhaben – ich melde mich mit einem klaren nächsten Schritt.
             </p>
