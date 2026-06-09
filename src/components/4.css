@@ -12,24 +12,23 @@
   position: relative;
 }
 
-/* Desktop: Logo links – identisch zum Hero (Aufmacher) */
-.kontakt-logo-left {
+/* Desktop: statisches Logo rechts – Spiegelung zum Hero links */
+.kontakt-logo-right {
   display: none;
 }
 
 @media (min-width: 769px) {
-  .kontakt-wrapper .kontakt-logo-left {
-    --aufmacher-logo-left: var(--content-start, 10vw);
-    --aufmacher-logo-w: var(--aufmacher-logo-width, 34vw);
+  .kontakt-wrapper .kontakt-logo-right {
     display: block;
     position: absolute;
     top: 50%;
-    left: var(--aufmacher-logo-left);
+    right: 10vw;
     transform: translateY(-50%);
-    width: var(--aufmacher-logo-w);
+    width: 34vw;
     height: auto;
     z-index: 2;
     pointer-events: none;
+    object-fit: contain;
   }
 }
 

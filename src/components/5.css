@@ -129,14 +129,19 @@
   }
 
   .uebermich-image-wrap {
-    width: min(68vw, 260px);
+    width: min(54vw, 220px);
     margin: 0 0 0 10vw;
     align-self: flex-start;
+    overflow: hidden;
+    border-radius: 12px;
   }
 
   .uebermich-image {
+    display: block;
     max-height: 36vh;
-    width: 100%;
+    width: 151.52%;
+    margin-left: -25.76%;
+    height: auto;
     object-fit: cover;
     object-position: center top;
   }

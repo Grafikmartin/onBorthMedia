@@ -1,10 +1,8 @@
-import { useRef, type CSSProperties } from 'react'
+import { useRef } from 'react'
 import './4.css'
 import SectionDots from './SectionDots'
-import LogoWeisserPunkt from './LogoWeisserPunkt'
+import obmLogo from '../assets/OBM-Logo.svg'
 import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
-
-const LOGO_WIDTH_VW = 34
 
 function Four({ id }: { id?: string }) {
   const sectionRef = useRef<HTMLElement>(null)
@@ -34,9 +32,11 @@ function Four({ id }: { id?: string }) {
         }}
       >
       <SectionDots />
-      <LogoWeisserPunkt
-        className="aufmacher-logo kontakt-logo-left"
-        style={{ '--aufmacher-logo-width': `${LOGO_WIDTH_VW}vw` } as CSSProperties}
+      <img
+        src={obmLogo}
+        alt=""
+        className="kontakt-logo-right"
+        aria-hidden="true"
       />
         <div className="kontakt-content kontakt-content-scrollable">
           <div className="kontakt-text">
@@ -46,6 +46,7 @@ function Four({ id }: { id?: string }) {
             </p>
             <p className="kontakt-address">
               OnBorthMedia – Webseiten, Webapps und Design aus einer Hand.<br />
+              Batensen 4, 29562 Suhlendorf<br />
               E-Mail: <a href="mailto:kontakt@onborthmedia.de" className="kontakt-link">kontakt@onborthmedia.de</a>
             </p>
             <p className="kontakt-note">

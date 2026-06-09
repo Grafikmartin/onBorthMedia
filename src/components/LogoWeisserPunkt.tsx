@@ -1,4 +1,5 @@
 import { useState, useEffect, type CSSProperties } from 'react'
+import './LogoWeisserPunkt.css'
 
 const BRAND_RED = '#E62727'
 
@@ -13,11 +14,26 @@ const DOT_COLORS = [
   '#4DFF4D',
 ]
 
-const OTHER_DOT_COLORS = DOT_COLORS.filter((c) => c !== BRAND_RED)
-
 const I_STEM_PATH = 'M257.043 39.582V18.7483H261.666V39.582H257.043Z'
 const I_DOT_PATH =
   'M259.334 15.8479C258.53 15.8479 257.833 15.5483 257.244 14.9492C256.654 14.35 256.359 13.642 256.359 12.8249C256.359 12.0079 256.654 11.2999 257.244 10.7007C257.833 10.1016 258.53 9.80202 259.334 9.80202C260.165 9.80202 260.862 10.1016 261.425 10.7007C262.015 11.2999 262.31 12.0079 262.31 12.8249C262.31 13.642 262.015 14.35 261.425 14.9492C260.862 15.5483 260.165 15.8479 259.334 15.8479Z'
+
+const DOT_CX = 259.334
+const DOT_CY = 13.35
+const HEARTBEAT_BPM = 72
+const HEARTBEAT_CYCLE_MS = Math.round(60000 / HEARTBEAT_BPM)
+const LUB_DUB_GAP_MS = 130
+const PULSE_MS = 280
+
+type ExitDot = {
+  color: string
+  key: number
+}
+
+function pickNextColor(current: string): string {
+  const options = DOT_COLORS.filter((c) => c !== current)
+  return options[Math.floor(Math.random() * options.length)]
+}
 
 type LogoWeisserPunktProps = {
   className?: string
@@ -26,22 +42,45 @@ type LogoWeisserPunktProps = {
 
 function LogoWeisserPunkt({ className, style }: LogoWeisserPunktProps) {
   const [dotColor, setDotColor] = useState(BRAND_RED)
+  const [exitDot, setExitDot] = useState<ExitDot | null>(null)
+
+  const pulse = () => {
+    setDotColor((prev) => {
+      setExitDot({ color: prev, key: Date.now() })
+      return pickNextColor(prev)
+    })
+  }
 
   useEffect(() => {
-    const pickNext = (current: string) => {
-      if (Math.random() < 0.25 && current !== BRAND_RED) {
-        return BRAND_RED
-      }
-      const options = OTHER_DOT_COLORS.filter((c) => c !== current)
-      return options[Math.floor(Math.random() * options.length)]
+    const timeouts: ReturnType<typeof setTimeout>[] = []
+    let cancelled = false
+
+    const runHeartbeatCycle = () => {
+      if (cancelled) return
+
+      pulse() // lub
+      timeouts.push(
+        setTimeout(() => {
+          if (cancelled) return
+          pulse() // dub
+          timeouts.push(setTimeout(runHeartbeatCycle, HEARTBEAT_CYCLE_MS - LUB_DUB_GAP_MS))
+        }, LUB_DUB_GAP_MS),
+      )
     }
 
-    const interval = setInterval(() => {
-      setDotColor((prev) => pickNext(prev))
-    }, 500)
+    runHeartbeatCycle()
 
-    return () => clearInterval(interval)
+    return () => {
+      cancelled = true
+      timeouts.forEach(clearTimeout)
+    }
   }, [])
+
+  useEffect(() => {
+    if (!exitDot) return
+    const timeout = setTimeout(() => setExitDot(null), PULSE_MS)
+    return () => clearTimeout(timeout)
+  }, [exitDot])
 
   return (
     <svg
@@ -62,7 +101,14 @@ function LogoWeisserPunkt({ className, style }: LogoWeisserPunktProps) {
         fill="white"
       />
       <path d={I_STEM_PATH} fill="white" />
-      <path d={I_DOT_PATH} fill={dotColor} />
+      <g transform={`translate(${DOT_CX} ${DOT_CY})`}>
+        {exitDot && (
+          <g key={exitDot.key} className="logo-i-dot-exit">
+            <path d={I_DOT_PATH} fill={exitDot.color} transform={`translate(${-DOT_CX} ${-DOT_CY})`} />
+          </g>
+        )}
+        <path d={I_DOT_PATH} fill={dotColor} transform={`translate(${-DOT_CX} ${-DOT_CY})`} />
+      </g>
       <path
         d="M241.011 40.0722C239.376 40.0722 237.888 39.8135 236.548 39.296C235.235 38.7513 234.109 37.9752 233.171 36.9675C232.26 35.9599 231.549 34.7752 231.04 33.4136C230.557 32.0246 230.316 30.4996 230.316 28.8383C230.316 26.7141 230.732 24.8622 231.563 23.2827C232.42 21.7031 233.6 20.4776 235.101 19.6061C236.602 18.7074 238.317 18.2581 240.247 18.2581C241.212 18.2581 242.123 18.4078 242.981 18.7074C243.839 19.007 244.616 19.4291 245.313 19.9738C246.01 20.5184 246.573 21.1584 247.002 21.8937H247.042V9.76118H251.666V28.92C251.666 31.2076 251.21 33.1957 250.299 34.8842C249.414 36.5454 248.168 37.8254 246.56 38.7241C244.978 39.6228 243.129 40.0722 241.011 40.0722ZM241.011 36.0688C242.19 36.0688 243.222 35.7829 244.107 35.211C245.018 34.6118 245.729 33.7948 246.238 32.76C246.747 31.7251 247.002 30.5268 247.002 29.1651C247.002 27.8034 246.747 26.6052 246.238 25.5703C245.729 24.5354 245.018 23.732 244.107 23.1601C243.222 22.561 242.177 22.2614 240.971 22.2614C239.818 22.2614 238.786 22.561 237.875 23.1601C236.964 23.7592 236.253 24.5763 235.744 25.6111C235.235 26.646 234.98 27.8307 234.98 29.1651C234.98 30.5268 235.235 31.7251 235.744 32.76C236.253 33.7948 236.964 34.6118 237.875 35.211C238.813 35.7829 239.858 36.0688 241.011 36.0688Z"
         fill="white"

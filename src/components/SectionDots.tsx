@@ -1,5 +1,5 @@
 import './SectionDots.css'
-import logoSvg from '../assets/Logo-weißerPunkt.svg'
+import logoSvg from '../assets/OBM-Logo.svg'
 
 function SectionDots() {
   return (
