@@ -45,14 +45,13 @@ function Five({ id }: { id?: string }) {
             <h2 className="uebermich-title">Über mich</h2>
             <p className="uebermich-lead">Moin, ich bin Martin Borth.</p>
             <p>
-              Ich verbinde Grafikdesign, Markenkommunikation und Webentwicklung zu durchgängigen
-              Lösungen: vom hochwertigen Printauftritt über CI-konforme Marketingmaterialien bis zu
-              Webseiten und Anwendungen, bei denen Gestaltung und Technik zusammenpassen.
+              Als Webentwickler und Grafikdesigner unterstütze ich Unternehmen dabei, sichtbar zu werden
+              – mit professionellen Webseiten, individuellen Webapps und einer klaren visuellen Identität.
             </p>
             <p>
-              Mit über 20 Jahren Berufserfahrung in Werbeagenturen, Verlag und BI-Consulting bringe
-              ich gestalterisches Know-how und moderne Entwicklung zusammen – damit Ihr Projekt
-              ästhetisch stark und technisch solide umgesetzt wird.
+              Durch meine Erfahrung in Werbeagenturen, Verlag und BI-Consulting bringe ich seit über
+              20 Jahren Design, Kommunikation und Technik zusammen. Das Ergebnis sind Lösungen, die nicht
+              nur funktionieren, sondern auch nachhaltig Eindruck hinterlassen.
             </p>
           </div>
         </div>
