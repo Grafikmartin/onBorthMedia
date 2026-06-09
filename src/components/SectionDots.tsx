@@ -1,15 +1,8 @@
 import './SectionDots.css'
-import logoSvg from '../assets/OBM-Logo.svg'
+import ObmLogo from './ObmLogo'
 
 function SectionDots() {
-  return (
-    <img
-      src={logoSvg}
-      alt=""
-      className="section-logo"
-      aria-hidden="true"
-    />
-  )
+  return <ObmLogo className="section-logo" />
 }
 
 export default SectionDots

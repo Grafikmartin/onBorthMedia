@@ -25,7 +25,7 @@
   display: flex;
   width: 80px;
   height: 80px;
-  background: #000000;
+  background: var(--farbe-1);
   justify-content: center;
   align-items: center;
   transition: 0.5s;
@@ -92,7 +92,7 @@
 
 .social-icons li a:hover i,
 .social-icons li a:hover svg {
-  color: #000;
+  color: var(--farbe-1);
 }
 
 .social-icons .linkedin-icon {

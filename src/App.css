@@ -1,6 +1,6 @@
 .app {
   width: 100%;
-  background: var(--bg-primary, #ffffff);
+  background: var(--bg-primary);
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -18,7 +18,7 @@
   left: 0;
   z-index: 0; /* Sehr niedrig, damit kein Stacking Context erstellt wird */
   overflow: visible;
-  background-color: var(--bg-primary, #ffffff);
+  background-color: var(--bg-primary);
 }
 
 .welcome-container {

@@ -50,7 +50,7 @@
   transform-origin: center center;
   width: calc(var(--aufmacher-line-half) * 2);
   height: var(--aufmacher-line-height, 70vw);
-  background-color: #000000;
+  background-color: var(--farbe-1);
   z-index: 40;
   pointer-events: none;
 }
@@ -76,7 +76,7 @@
 
 .aufmacher-heading {
   font-family: 'Roboto', sans-serif;
-  color: #000000;
+  color: var(--text-on-light);
   text-align: left !important;
   margin-left: 0 !important;
   align-self: flex-start !important;

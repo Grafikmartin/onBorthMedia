@@ -43,7 +43,7 @@
 .einfuehrungstext-title {
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
-  color: var(--text-primary, #000000);
+  color: var(--text-on-light);
   margin: 0 0 1rem 0;
 }
 
@@ -85,7 +85,7 @@
 .einfuehrungstext-text p {
   font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.6;
-  color: var(--text-primary, #000000);
+  color: var(--text-on-light);
   margin: 0 0 1rem 0;
 }
 

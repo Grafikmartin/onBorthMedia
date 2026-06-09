@@ -87,21 +87,21 @@
 .uebermich-title {
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-on-dark);
   margin: 0 0 1rem 0;
 }
 
 .uebermich-lead {
   font-size: clamp(1.1rem, 2vw, 1.35rem);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.92);
+  color: color-mix(in srgb, var(--farbe-2) 92%, transparent);
   margin: 0 0 1rem 0;
 }
 
 .uebermich-content p {
   font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.92);
+  color: color-mix(in srgb, var(--farbe-2) 92%, transparent);
   margin: 0 0 1rem 0;
 }
 

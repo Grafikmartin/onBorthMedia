@@ -1,6 +1,7 @@
 /* Nur auf Handy: Logo oben rechts in der Sektion (statisch, ohne i-Punkt-Animation) */
 .section-logo {
   display: none;
+  flex-shrink: 0;
   position: absolute;
   /* Gleiche Höhe wie Hamburger-Icon (3vh + halbe Button-Höhe 44px) */
   top: calc(3vh + 22px);

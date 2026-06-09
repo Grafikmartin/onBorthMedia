@@ -26,9 +26,9 @@
   background: radial-gradient(
     ellipse 95% 85% at 50% 50%,
     transparent 22%,
-    rgba(0, 0, 0, 0.65) 45%,
-    rgba(0, 0, 0, 0.92) 68%,
-    #000000 100%
+    color-mix(in srgb, var(--farbe-1) 65%, transparent) 45%,
+    color-mix(in srgb, var(--farbe-1) 92%, transparent) 68%,
+    var(--farbe-1) 100%
   );
 }
 

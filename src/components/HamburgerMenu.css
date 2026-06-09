@@ -43,12 +43,12 @@
   display: block;
   width: 24px;
   height: 2px;
-  background: var(--text-primary, #000000);
+  background: var(--farbe-1);
   transition: transform 0.3s ease, background 0.2s ease;
 }
 
 .hamburger-menu--on-dark .hamburger-line {
-  background: #ffffff;
+  background: var(--farbe-2);
 }
 
 .hamburger-backdrop {
@@ -96,13 +96,13 @@
   border-radius: 12px;
   font-size: 1rem;
   font-family: inherit;
-  color: var(--text-primary, #000000);
+  color: var(--text-on-light);
   text-align: left;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .hamburger-nav-item:hover {
-  background-color: #E62727;
-  color: #ffffff;
+  background-color: var(--farbe-primary);
+  color: var(--farbe-2);
 }

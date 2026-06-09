@@ -2,7 +2,7 @@
   position: fixed;
   width: 8px;
   height: 8px;
-  background: var(--color-signal, #e36255);
+  background: var(--farbe-primary);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);

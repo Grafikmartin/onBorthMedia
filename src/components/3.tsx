@@ -71,7 +71,7 @@ function Three({ id }: { id?: string }) {
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'flex-start',
-          backgroundColor: 'var(--color-surface, #f5f5f5)',
+          backgroundColor: 'var(--color-surface)',
           padding: 'var(--spacing-xl, 4rem) 0',
           transform: isSticky ? 'none' : `scale(${scale})`,
           transformOrigin: 'top center',

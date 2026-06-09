@@ -27,7 +27,7 @@ function One({ id }: { id?: string }) {
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'flex-start',
-          backgroundColor: '#ffffff',
+          backgroundColor: 'var(--farbe-2)',
           padding: 'var(--spacing-xl, 4rem) 0',
           transform: isSticky ? 'none' : `scale(${scale})`,
           transformOrigin: 'top center',

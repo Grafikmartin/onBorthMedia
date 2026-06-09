@@ -53,14 +53,14 @@
 .kontakt-title {
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
-  color: var(--text-primary, #000000);
+  color: var(--text-on-light);
   margin: 0 0 1rem 0;
 }
 
 .kontakt-address {
   font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.6;
-  color: var(--text-primary, #000000);
+  color: var(--text-on-light);
   margin: 0;
 }
 
@@ -69,7 +69,7 @@
 }
 
 .kontakt-link {
-  color: var(--text-primary, #000000);
+  color: var(--text-on-light);
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
@@ -85,10 +85,10 @@
   align-self: flex-start;
   flex-shrink: 0;
   padding: 0.6rem 1.5rem;
-  background: #000000;
+  background: var(--farbe-1);
   border: 1px solid transparent;
   border-radius: 12px;
-  color: #ffffff;
+  color: var(--farbe-2);
   font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   text-decoration: none;
   text-transform: none;
@@ -97,12 +97,13 @@
 }
 
 .kontakt-anfahrt-btn:hover {
-  background-color: #E62727;
-  color: #ffffff;
+  background-color: var(--farbe-primary);
+  color: var(--farbe-2);
 }
 
 .kontakt-logo {
   display: block;
+  flex-shrink: 0;
   width: min(33.6vw, 239px);
   max-width: 100%;
   height: auto;
@@ -112,14 +113,14 @@
 .kontakt-tagline {
   font-size: clamp(1.15rem, 2.4vw, 1.45rem);
   line-height: 1.4;
-  color: var(--text-primary, #000000);
+  color: var(--text-on-light);
   margin: 0 0 1rem 0;
 }
 
 .kontakt-note {
   font-size: clamp(0.95rem, 1.8vw, 1.1rem);
   line-height: 1.6;
-  color: var(--text-secondary, rgba(0, 0, 0, 0.8));
+  color: var(--text-secondary);
   margin: 1rem 0 0 0;
 }
 
@@ -129,7 +130,7 @@
   height: min(45vh, 420px);
   min-height: 320px;
   margin-top: var(--spacing-sm, 1rem);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-on-light);
   overflow: hidden;
   border-radius: 12px;
 }
@@ -150,8 +151,8 @@
 }
 
 .kontakt-content .social-links-row .social-cube-tooltip--inline {
-  color: rgba(0, 0, 0, 0.45);
-  border-color: rgba(0, 0, 0, 0.2);
+  color: color-mix(in srgb, var(--farbe-1) 45%, transparent);
+  border-color: color-mix(in srgb, var(--farbe-1) 20%, transparent);
 }
 
 @media (max-width: 768px) {

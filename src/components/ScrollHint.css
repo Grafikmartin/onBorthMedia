@@ -16,7 +16,7 @@
 .scroll-hint-text {
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--scroll-color, #000000);
+  color: var(--scroll-color);
   text-transform: lowercase;
   white-space: nowrap;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -25,7 +25,7 @@
 .scroll-hint-arrow {
   font-size: 1.5rem;
   font-weight: 900;
-  color: var(--scroll-color, #000000);
+  color: var(--scroll-color);
   animation: arrow-bounce 2s ease-in-out infinite;
   transition: color 0.3s ease, transform 0.3s ease;
   line-height: 1;

@@ -21,7 +21,7 @@
 .about-title {
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
-  color: var(--text-primary, #000000);
+  color: var(--text-on-light);
   margin: 0 0 1rem 0;
 }
 
@@ -58,10 +58,10 @@
 }
 
 .more-button {
-  background: rgba(230, 39, 39, 0.12);
+  background: var(--color-primary-highlight);
   border: 1px solid transparent;
   border-radius: 12px;
-  color: var(--text-primary, #000000);
+  color: var(--text-on-light);
   padding: 0.5rem 1.5rem;
   font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   cursor: pointer;
@@ -72,14 +72,14 @@
 }
 
 .more-button:hover {
-  background-color: #E62727;
-  color: #ffffff;
+  background-color: var(--farbe-primary);
+  color: var(--farbe-2);
 }
 
 .about-text p {
   font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.6;
-  color: var(--text-primary, #000000);
+  color: var(--text-on-light);
   margin: 0 0 1rem 0;
   opacity: 0;
   transform: translateY(30px);

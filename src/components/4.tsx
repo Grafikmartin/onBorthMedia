@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import './4.css'
 import { SocialLinks } from './SocialLinks'
-import obmLogo from '../assets/OBM-Logo.svg'
+import ObmLogo from './ObmLogo'
 import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
 
 function Four({ id }: { id?: string }) {
@@ -22,7 +22,7 @@ function Four({ id }: { id?: string }) {
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'flex-start',
-          backgroundColor: '#ffffff',
+          backgroundColor: 'var(--farbe-2)',
           padding: 'var(--spacing-xl, 4rem) 0',
           transform: isSticky ? 'none' : `scale(${scale})`,
           transformOrigin: 'top center',
@@ -34,11 +34,7 @@ function Four({ id }: { id?: string }) {
         <div className="kontakt-content">
           <div className="kontakt-text kontakt-content-scrollable">
             <h2 className="kontakt-title">Kontakt</h2>
-            <img
-              src={obmLogo}
-              alt="OnBorthMedia"
-              className="kontakt-logo"
-            />
+            <ObmLogo className="kontakt-logo" title="OnBorthMedia" />
             <p className="kontakt-tagline">Gemeinsam auf Kurs.</p>
             <p className="kontakt-address">
               Erzähl mir von deinem Vorhaben – ich melde mich mit einem klaren nächsten Schritt.

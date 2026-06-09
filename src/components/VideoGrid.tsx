@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react'
 import './VideoGrid.css'
+import { getBrandGridColors } from '../utils/styleguide'
 
 const DESKTOP_ROWS = 5
 const DESKTOP_COLS = 7
 const MOBILE_ROWS = 9
 const MOBILE_COLS = 5
-
-const GRID_COLORS = ['#000000', '#E62727', '#ffffff', 'transparent']
-const SOLID_COLORS = ['#000000', '#E62727', '#ffffff']
 
 function getGridDimensions(width: number) {
   const mobile = width <= 768
@@ -38,7 +36,12 @@ function getPulseCellIndices(rows: number, cols: number): number[] {
   return indices
 }
 
-function getInitialColors(rows: number, cols: number): string[] {
+function getInitialColors(
+  rows: number,
+  cols: number,
+  gridColors: string[],
+  solidColors: string[],
+): string[] {
   const total = rows * cols
   const freeIndex = getFreeCellIndex(cols)
   const pulseIndices = new Set(getPulseCellIndices(rows, cols))
@@ -46,28 +49,32 @@ function getInitialColors(rows: number, cols: number): string[] {
   return Array.from({ length: total }, (_, index) => {
     if (index === freeIndex) return 'transparent'
     if (pulseIndices.has(index)) {
-      return SOLID_COLORS[Math.floor(Math.random() * SOLID_COLORS.length)]
+      return solidColors[Math.floor(Math.random() * solidColors.length)]
     }
-    return GRID_COLORS[Math.floor(Math.random() * GRID_COLORS.length)]
+    return gridColors[Math.floor(Math.random() * gridColors.length)]
   })
 }
 
-function pickNextColor(current: string): string {
-  const options = GRID_COLORS.filter((c) => c !== current)
+function pickNextColor(current: string, palette: string[]): string {
+  const options = palette.filter((c) => c !== current)
   return options[Math.floor(Math.random() * options.length)]
 }
 
-function pickSolidColor(current: string): string {
-  const options = SOLID_COLORS.filter((c) => c !== current)
+function pickSolidColor(current: string, palette: string[]): string {
+  const options = palette.filter((c) => c !== 'transparent' && c !== current)
   return options[Math.floor(Math.random() * options.length)]
 }
 
 function VideoGrid() {
+  const brandColors = getBrandGridColors()
+  const gridColors = brandColors
+  const solidColors = brandColors.filter((c) => c !== 'transparent')
+
   const [gridSize, setGridSize] = useState(() =>
     getGridDimensions(typeof window !== 'undefined' ? window.innerWidth : 1200),
   )
   const [cellColors, setCellColors] = useState(() =>
-    getInitialColors(gridSize.rows, gridSize.cols),
+    getInitialColors(gridSize.rows, gridSize.cols, gridColors, solidColors),
   )
 
   useEffect(() => {
@@ -85,8 +92,8 @@ function VideoGrid() {
   }, [])
 
   useEffect(() => {
-    setCellColors(getInitialColors(gridSize.rows, gridSize.cols))
-  }, [gridSize.rows, gridSize.cols])
+    setCellColors(getInitialColors(gridSize.rows, gridSize.cols, gridColors, solidColors))
+  }, [gridSize.rows, gridSize.cols, gridColors.join(','), solidColors.join(',')])
 
   const freeCellIndex = getFreeCellIndex(gridSize.cols)
   const pulseCellIndices = getPulseCellIndices(gridSize.rows, gridSize.cols)
@@ -104,7 +111,7 @@ function VideoGrid() {
         setCellColors((prev) => {
           const next = [...prev]
           next[index] =
-            prev[index] === 'transparent' ? pickSolidColor(prev[index]) : 'transparent'
+            prev[index] === 'transparent' ? pickSolidColor(prev[index], solidColors) : 'transparent'
           return next
         })
         return
@@ -112,7 +119,7 @@ function VideoGrid() {
 
       setCellColors((prev) => {
         const next = [...prev]
-        next[index] = pickNextColor(prev[index])
+        next[index] = pickNextColor(prev[index], gridColors)
         return next
       })
     }
@@ -136,7 +143,7 @@ function VideoGrid() {
       timeouts.forEach((t) => clearTimeout(t))
       intervals.forEach((i) => clearInterval(i))
     }
-  }, [gridSize.rows, gridSize.cols, freeCellIndex, pulseCellIndices.join(',')])
+  }, [gridSize.rows, gridSize.cols, freeCellIndex, pulseCellIndices.join(','), gridColors.join(','), solidColors.join(',')])
 
   return (
     <div
