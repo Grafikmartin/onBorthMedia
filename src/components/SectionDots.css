@@ -13,3 +13,9 @@
   object-fit: contain;
 }
 
+@media (max-width: 768px) {
+  .section-logo {
+    display: block;
+  }
+}
+

@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import './4.css'
-import SectionDots from './SectionDots'
 import { SocialLinks } from './SocialLinks'
 import obmLogo from '../assets/OBM-Logo.svg'
 import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
@@ -32,7 +31,6 @@ function Four({ id }: { id?: string }) {
           zIndex: 420,
         }}
       >
-      <SectionDots />
         <div className="kontakt-content">
           <div className="kontakt-text kontakt-content-scrollable">
             <h2 className="kontakt-title">Kontakt</h2>
