@@ -24,7 +24,7 @@
 
 .leistungen-title {
   font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 700;
+  font-weight: 400;
   color: #ffffff;
   margin: 0 0 1rem 0;
 }

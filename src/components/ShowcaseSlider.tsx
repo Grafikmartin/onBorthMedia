@@ -1,4 +1,9 @@
 import './ShowcaseSlider.css'
+import getwizeImage from '../assets/getwize.ai.png'
+import mbSoundImage from '../assets/mb-sound.jpg'
+import benjaminBorthVideo from '../assets/BildschirmaufnahmeBB.mov'
+import architekturMVideo from '../assets/ArchitekturM.mov'
+import portfolioVideo from '../assets/Portfolio.mov'
 import wetterVideo from '../assets/wetter-copy.mkv'
 import pingpongVideo from '../assets/pingpong.mkv'
 import radioPulseVideo from '../assets/RadioPulse.mkv'
@@ -8,6 +13,7 @@ export type ShowcaseItem = {
   id: string
   label: string
   accent?: string
+  image?: string
   video?: string
 }
 
@@ -31,8 +37,16 @@ function ShowcaseSlider({ items, variant = 'light' }: ShowcaseSliderProps) {
             </div>
             <div
               className="showcase-slider-card-preview"
-              style={!item.video && item.accent ? { backgroundColor: item.accent } : undefined}
+              style={!item.video && !item.image && item.accent ? { backgroundColor: item.accent } : undefined}
             >
+              {item.image && (
+                <img
+                  className="showcase-slider-card-image"
+                  src={item.image}
+                  alt=""
+                  loading="lazy"
+                />
+              )}
               {item.video && (
                 <video
                   className="showcase-slider-card-video"
@@ -53,12 +67,11 @@ function ShowcaseSlider({ items, variant = 'light' }: ShowcaseSliderProps) {
 }
 
 export const WEBSITE_SHOWCASE: ShowcaseItem[] = [
-  { id: 'web-1', label: 'Unternehmensseite', accent: '#f0f0f0' },
-  { id: 'web-2', label: 'Portfolio', accent: '#e8e8e8' },
-  { id: 'web-3', label: 'Landingpage', accent: '#E62727' },
-  { id: 'web-4', label: 'Onepager', accent: '#1a1a1a' },
-  { id: 'web-5', label: 'Microsite', accent: '#f5f5f5' },
-  { id: 'web-6', label: 'Relaunch', accent: '#ffffff' },
+  { id: 'web-getwize', label: 'getwize.ai', image: getwizeImage },
+  { id: 'web-bb', label: 'Benjamin Borth', video: benjaminBorthVideo },
+  { id: 'web-mbsound', label: 'mb-sound', image: mbSoundImage },
+  { id: 'web-architektur', label: 'Architektur M', video: architekturMVideo },
+  { id: 'web-portfolio', label: 'Portfolio', video: portfolioVideo },
 ]
 
 export const WEBAPP_SHOWCASE: ShowcaseItem[] = [

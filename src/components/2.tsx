@@ -42,8 +42,7 @@ function Two({ id }: { id?: string }) {
       <div className="leistungen-text">
         <h2 className="leistungen-title">Webapps</h2>
         <p>Individuelle Anwendungen, Portale und digitale Prozesse – maßgeschneidert für dein Geschäftsmodell.</p>
-        <p>Von der Konzeption über UX und Entwicklung bis zum Launch begleiten wir komplexe Webprojekte aus einer Hand.</p>
-        <h3 className="leistungen-subtitle">Digitale Lösungen</h3>
+        <p>Von der Konzeption über UX und Entwicklung bis zum Launch – komplexe Webprojekte aus einer Hand.</p>
         <p>Dashboards, Kundenportale, interne Tools und datengetriebene Anwendungen – skalierbar und zukunftssicher.</p>
         <ShowcaseSlider items={WEBAPP_SHOWCASE} variant="dark" />
       </div>

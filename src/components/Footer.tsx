@@ -6,10 +6,19 @@ const LEGAL_IMPRESSUM = {
   content: (
     <>
       <p><strong>Angaben gemäß § 5 TMG</strong></p>
-      <p>OnBorthMedia<br />Batensen 4<br />29562 Suhlendorf</p>
+      <p>
+        Martin Borth<br />
+        OnBorthMedia<br />
+        Batensen 4<br />
+        29562 Suhlendorf
+      </p>
       <p><strong>Kontakt</strong><br />E-Mail: kontakt@onborthmedia.de</p>
-      <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</strong><br />[Name], [Adresse]</p>
-      <p>Platzhaltertext – bitte durch rechtlich korrekte Angaben ersetzen.</p>
+      <p>
+        <strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</strong><br />
+        Martin Borth<br />
+        Batensen 4<br />
+        29562 Suhlendorf
+      </p>
     </>
   ),
 }
