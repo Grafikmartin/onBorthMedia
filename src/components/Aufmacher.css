@@ -18,15 +18,83 @@
   pointer-events: none;
 }
 
+/* Symmetrie: Abstand Logo→Strich = Strich→Text */
+.aufmacher-logo-portal,
+.aufmacher-line-portal,
+.aufmacher-heading-portal {
+  --aufmacher-line-center: 47vw;
+  --aufmacher-logo-left: var(--content-start, 10vw);
+  --aufmacher-logo-w: var(--aufmacher-logo-width, 34vw);
+  --aufmacher-line-half: 0.2vw;
+  --aufmacher-side-gap: calc(
+    var(--aufmacher-line-center) - var(--aufmacher-logo-left) - var(--aufmacher-logo-w)
+  );
+}
+
+.aufmacher-logo-portal {
+  position: fixed;
+  top: 50%;
+  left: var(--aufmacher-logo-left);
+  transform: translateY(-50%);
+  width: var(--aufmacher-logo-w);
+  height: auto;
+  z-index: 400;
+  display: block;
+}
+
+.aufmacher-line-portal {
+  position: fixed;
+  top: 50%;
+  left: calc(var(--aufmacher-line-center) - var(--aufmacher-line-half));
+  transform: translateY(-50%);
+  transform-origin: center center;
+  width: calc(var(--aufmacher-line-half) * 2);
+  height: var(--aufmacher-line-height, 70vw);
+  background-color: #000000;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.aufmacher-heading-portal {
+  position: fixed;
+  left: calc(var(--aufmacher-line-center) + var(--aufmacher-side-gap));
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  min-height: 5.5em;
+  width: fit-content;
+  max-width: var(--aufmacher-logo-w);
+  box-sizing: border-box;
+  font-size: calc(var(--aufmacher-logo-w) / 8.2);
+}
+
 .aufmacher-heading {
+  font-family: 'Roboto', sans-serif;
+  color: #000000;
   text-align: left !important;
   margin-left: 0 !important;
   align-self: flex-start !important;
 }
 
-.aufmacher-heading .aufmacher-name,
 .aufmacher-heading .aufmacher-title {
+  width: fit-content;
+  max-width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin-left: 0;
+  line-height: 1.35;
   text-align: left !important;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Blinkender Cursor wie bei Schreibmaschine / Editor */
@@ -40,13 +108,27 @@
   50% { opacity: 0; }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.6;
-    transform: translate(-50%, -50%) scale(1);
+@media (max-width: 768px) {
+  .aufmacher-logo-portal,
+  .aufmacher-line-portal,
+  .aufmacher-heading-portal {
+    --aufmacher-logo-left: 8vw;
+    --aufmacher-logo-w: min(var(--aufmacher-logo-width, 34vw), 38vw);
+    --aufmacher-line-half: 0.12vw;
   }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.05);
+
+  .aufmacher-line-portal {
+    min-width: 1px;
+    max-width: 2px;
+  }
+
+  .aufmacher-heading-portal {
+    min-height: 4em;
+  }
+
+  .aufmacher-heading .aufmacher-title {
+    font-weight: 500;
+    line-height: 1.3;
+    margin-left: 0;
   }
 }

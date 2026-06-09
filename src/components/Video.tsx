@@ -83,6 +83,7 @@ function Video() {
     <section className="video-section">
       <div
         className="video-wrapper"
+        data-header-bg="dark"
         style={{
           position: isSticky ? 'fixed' : 'absolute',
           top: 0,

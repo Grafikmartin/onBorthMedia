@@ -55,6 +55,7 @@ function Four({ id }: { id?: string }) {
     <section id={id} className="kontakt-section">
       <div
         className="kontakt-wrapper"
+        data-header-bg="light"
         style={{
           position: isSticky ? 'fixed' : 'absolute',
           top: 0,

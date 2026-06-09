@@ -16,6 +16,8 @@ type HamburgerMenuProps = {
 function HamburgerMenu({ onImpressumClick }: HamburgerMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
+  const [onDarkBg, setOnDarkBg] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>()
 
   const closeMenu = () => {
@@ -43,6 +45,36 @@ function HamburgerMenu({ onImpressumClick }: HamburgerMenuProps) {
     return () => document.body.classList.remove('hamburger-menu-open')
   }, [isOpen])
 
+  useEffect(() => {
+    const updateHeaderTheme = () => {
+      const menu = menuRef.current
+      if (!menu) return
+
+      const rect = menu.getBoundingClientRect()
+      const x = Math.min(Math.max(rect.left + rect.width / 2, 0), window.innerWidth - 1)
+      const y = Math.min(Math.max(rect.top + rect.height / 2, 0), window.innerHeight - 1)
+
+      for (const el of document.elementsFromPoint(x, y)) {
+        if (menu.contains(el)) continue
+        const themed = el.closest('[data-header-bg]')
+        if (themed) {
+          setOnDarkBg(themed.getAttribute('data-header-bg') === 'dark')
+          return
+        }
+      }
+
+      setOnDarkBg(false)
+    }
+
+    updateHeaderTheme()
+    window.addEventListener('scroll', updateHeaderTheme, { passive: true })
+    window.addEventListener('resize', updateHeaderTheme)
+    return () => {
+      window.removeEventListener('scroll', updateHeaderTheme)
+      window.removeEventListener('resize', updateHeaderTheme)
+    }
+  }, [])
+
   const scrollTo = (id: string) => {
     const el = document.getElementById(id)
     if (el) {
@@ -52,7 +84,7 @@ function HamburgerMenu({ onImpressumClick }: HamburgerMenuProps) {
   }
 
   return (
-    <div className="hamburger-menu">
+    <div ref={menuRef} className={`hamburger-menu${onDarkBg ? ' hamburger-menu--on-dark' : ''}`}>
       <button
         className="hamburger-button"
         onClick={() => setIsOpen(!isOpen)}

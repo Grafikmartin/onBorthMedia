@@ -98,6 +98,7 @@ function Three({ id }: { id?: string }) {
       />
       <div
         className="about-wrapper"
+        data-header-bg="light"
         style={{
           position: isSticky ? 'fixed' : 'absolute',
           top: 0,

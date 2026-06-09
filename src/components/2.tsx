@@ -47,6 +47,7 @@ function Two({ id }: { id?: string }) {
     <section id={id} className="leistungen-section">
       <div
         className="leistungen-wrapper"
+        data-header-bg="dark"
         style={{
           position: isSticky ? 'fixed' : 'absolute',
           top: 0,

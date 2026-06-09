@@ -45,7 +45,7 @@ function App() {
   return (
     <div className="app">
       <HamburgerMenu onImpressumClick={() => setImpressumOpen(true)} />
-      <section className="aufmacher-section">
+      <section className="aufmacher-section" data-header-bg="light">
         <div className="welcome-container">
           <Aufmacher />
         </div>

@@ -52,6 +52,7 @@ function One({ id }: { id?: string }) {
       />
       <div
         className="einfuehrungstext-wrapper"
+        data-header-bg="light"
         style={{
           position: isSticky ? 'fixed' : 'absolute',
           top: 0,

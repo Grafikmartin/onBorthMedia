@@ -47,6 +47,10 @@
   transition: transform 0.3s ease, background 0.2s ease;
 }
 
+.hamburger-menu--on-dark .hamburger-line {
+  background: #ffffff;
+}
+
 .hamburger-backdrop {
   position: fixed;
   inset: 0;
