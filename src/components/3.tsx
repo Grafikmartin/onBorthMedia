@@ -2,14 +2,13 @@ import { useState, useEffect, useRef } from 'react'
 import './3.css'
 import SectionDots from './SectionDots'
 import ShowcaseSlider, { DESIGN_SHOWCASE } from './ShowcaseSlider'
+import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
 
 function Three({ id }: { id?: string }) {
   const [visibleParagraphs, setVisibleParagraphs] = useState<boolean[]>([false, false, false])
-  const [scale, setScale] = useState(0.7)
-  const [isScrolling, setIsScrolling] = useState(false)
-  const [isSticky, setIsSticky] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scale, isScrolling, isSticky } = useSectionScrollStack(sectionRef)
   const paragraphRefs = useRef<(HTMLParagraphElement | null)[]>([])
-  const aboutSectionRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     const observerOptions = {
@@ -54,43 +53,8 @@ function Three({ id }: { id?: string }) {
     }
   }, [isSticky])
 
-  useEffect(() => {
-    let scrollTimeout: ReturnType<typeof setTimeout>
-    const viewportHeight = window.innerHeight
-    const stickyPoint = viewportHeight * 4
-
-    const updateScale = () => {
-      const scrollY = window.scrollY
-      if (scrollY >= stickyPoint) {
-        setIsSticky(true)
-        setScale(1.0)
-      } else {
-        setIsSticky(false)
-        const scrollProgress = Math.min(Math.max((scrollY - viewportHeight * 3) / viewportHeight, 0), 1)
-        setScale(0.7 + scrollProgress * 0.3)
-      }
-    }
-
-    const handleScroll = () => {
-      setIsScrolling(true)
-      clearTimeout(scrollTimeout)
-      updateScale()
-      scrollTimeout = setTimeout(() => {
-        setIsScrolling(false)
-        updateScale()
-      }, 150)
-    }
-
-    updateScale()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      clearTimeout(scrollTimeout)
-    }
-  }, [])
-
   return (
-    <section ref={aboutSectionRef} id={id} className="about-section">
+    <section ref={sectionRef} id={id} className="about-section">
       <div
         className="about-spacer"
         style={{ minHeight: '100vh' }}

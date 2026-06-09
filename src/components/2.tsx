@@ -1,50 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useRef } from 'react'
 import './2.css'
 import SectionDots from './SectionDots'
 import ShowcaseSlider, { WEBAPP_SHOWCASE } from './ShowcaseSlider'
+import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
 
 function Two({ id }: { id?: string }) {
-  const [scale, setScale] = useState(0.7)
-  const [isScrolling, setIsScrolling] = useState(false)
-  const [isSticky, setIsSticky] = useState(false)
-
-  useEffect(() => {
-    let scrollTimeout: ReturnType<typeof setTimeout>
-    const viewportHeight = window.innerHeight
-    const stickyPoint = viewportHeight * 3
-
-    const updateScale = () => {
-      const scrollY = window.scrollY
-      if (scrollY >= stickyPoint) {
-        setIsSticky(true)
-        setScale(1.0)
-      } else {
-        setIsSticky(false)
-        const scrollProgress = Math.min(Math.max((scrollY - viewportHeight * 2) / viewportHeight, 0), 1)
-        setScale(0.7 + scrollProgress * 0.3)
-      }
-    }
-
-    const handleScroll = () => {
-      setIsScrolling(true)
-      clearTimeout(scrollTimeout)
-      updateScale()
-      scrollTimeout = setTimeout(() => {
-        setIsScrolling(false)
-        updateScale()
-      }, 150)
-    }
-
-    updateScale()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      clearTimeout(scrollTimeout)
-    }
-  }, [])
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scale, isScrolling, isSticky } = useSectionScrollStack(sectionRef)
 
   return (
-    <section id={id} className="leistungen-section">
+    <section ref={sectionRef} id={id} className="leistungen-section">
       <div
         className="leistungen-wrapper"
         data-header-bg="dark"

@@ -44,10 +44,12 @@ function Footer() {
 
   useEffect(() => {
     let scrollTimeout: ReturnType<typeof setTimeout>
-    const viewportHeight = window.innerHeight
-    const stickyPoint = viewportHeight * 6
 
     const update = () => {
+      const kontaktSection = document.getElementById('kontakt')
+      const stickyPoint = kontaktSection
+        ? kontaktSection.offsetTop + kontaktSection.offsetHeight
+        : window.innerHeight * 7
       setIsSticky(window.scrollY >= stickyPoint)
     }
 
@@ -59,8 +61,10 @@ function Footer() {
 
     update()
     window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', update)
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', update)
       clearTimeout(scrollTimeout)
     }
   }, [])
@@ -74,7 +78,7 @@ function Footer() {
           bottom: isSticky ? 0 : undefined,
           left: isSticky ? 0 : undefined,
           width: isSticky ? '100%' : undefined,
-          zIndex: isSticky ? 380 : 2001,
+          zIndex: isSticky ? 430 : 2001,
         }}
       >
         <p className="footer-legal">

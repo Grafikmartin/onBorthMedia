@@ -5,6 +5,7 @@ const MENU_ITEMS = [
   { label: 'Webseiten', id: 'webseiten' },
   { label: 'Webapps', id: 'webapps' },
   { label: 'Design', id: 'design' },
+  { label: 'Über mich', id: 'ueber-mich' },
   { label: 'Kontakt', id: 'kontakt' },
   { label: 'Impressum', action: 'impressum' as const },
 ]

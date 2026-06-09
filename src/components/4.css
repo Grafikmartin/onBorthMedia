@@ -9,6 +9,28 @@
 .kontakt-wrapper {
   border-radius: 12px 12px 0 0;
   overflow: hidden;
+  position: relative;
+}
+
+/* Desktop: Logo links – identisch zum Hero (Aufmacher) */
+.kontakt-logo-left {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .kontakt-wrapper .kontakt-logo-left {
+    --aufmacher-logo-left: var(--content-start, 10vw);
+    --aufmacher-logo-w: var(--aufmacher-logo-width, 34vw);
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: var(--aufmacher-logo-left);
+    transform: translateY(-50%);
+    width: var(--aufmacher-logo-w);
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
+  }
 }
 
 .kontakt-content {

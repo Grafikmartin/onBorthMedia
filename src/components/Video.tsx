@@ -2,17 +2,17 @@ import { useState, useEffect, useRef } from 'react'
 import './Video.css'
 import VideoGrid from './VideoGrid'
 import videoSrc from '../assets/mb.mp4'
+import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
 
 const VIDEO_SOURCES = [videoSrc]
 
 function Video() {
-  const [scale, setScale] = useState(0.7)
-  const [isScrolling, setIsScrolling] = useState(false)
-  const [isSticky, setIsSticky] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scale, isScrolling, isSticky } = useSectionScrollStack(sectionRef)
+  const [isVisible, setIsVisible] = useState(false)
 
   const handleVideoEnded = (index: number) => {
     if (index !== currentVideoIndex) return
@@ -42,45 +42,17 @@ function Video() {
   }, [currentVideoIndex, isTransitioning])
 
   useEffect(() => {
-    let scrollTimeout: ReturnType<typeof setTimeout>
-    const viewportHeight = window.innerHeight
-    const stickyPoint = viewportHeight
-
-    const updateScale = () => {
-      const scrollY = window.scrollY
-      const visible = scrollY > 0
-      setIsVisible(visible)
-      if (scrollY >= stickyPoint) {
-        setIsSticky(true)
-        setScale(1.0)
-      } else {
-        setIsSticky(false)
-        const scrollProgress = Math.min(scrollY / stickyPoint, 1)
-        setScale(0.7 + scrollProgress * 0.3)
-      }
+    const updateVisibility = () => {
+      setIsVisible(window.scrollY > 0)
     }
 
-    const handleScroll = () => {
-      setIsScrolling(true)
-      clearTimeout(scrollTimeout)
-      updateScale()
-      scrollTimeout = setTimeout(() => {
-        setIsScrolling(false)
-        updateScale()
-      }, 150)
-    }
-
-    updateScale()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      clearTimeout(scrollTimeout)
-    }
+    updateVisibility()
+    window.addEventListener('scroll', updateVisibility, { passive: true })
+    return () => window.removeEventListener('scroll', updateVisibility)
   }, [])
 
   return (
-    <section className="video-section">
+    <section ref={sectionRef} className="video-section">
       <div
         className="video-wrapper"
         data-header-bg="dark"

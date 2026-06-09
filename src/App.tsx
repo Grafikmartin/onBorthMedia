@@ -7,6 +7,7 @@ import One from './components/1'
 import Two from './components/2'
 import Three from './components/3'
 import Four from './components/4'
+import Five from './components/5'
 import ScrollHint from './components/ScrollHint'
 import Footer from './components/Footer'
 import CursorFollower from './components/CursorFollower'
@@ -54,6 +55,7 @@ function App() {
       <One id="webseiten" />
       <Two id="webapps" />
       <Three id="design" />
+      <Five id="ueber-mich" />
       <Four id="kontakt" />
       <Footer />
       {showScrollHint && <ScrollHint />}
