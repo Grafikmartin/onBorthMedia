@@ -12,11 +12,14 @@ import ScrollHint from './components/ScrollHint'
 import Footer from './components/Footer'
 import CursorFollower from './components/CursorFollower'
 import ImpressumDrawer from './components/ImpressumDrawer'
+import Loader from './components/Loader'
 
 function App() {
   const [canScroll, setCanScroll] = useState(false)
   const [showScrollHint, setShowScrollHint] = useState(false)
   const [impressumOpen, setImpressumOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [showLoader, setShowLoader] = useState(true)
 
   // Verhindere Scrollen während der Animation
   useEffect(() => {
@@ -33,18 +36,35 @@ function App() {
     }
   }, [canScroll])
 
+  useEffect(() => {
+    const finishLoading = () => {
+      setIsLoading(false)
+      window.setTimeout(() => setShowLoader(false), 400)
+    }
+
+    if (document.readyState === 'complete') {
+      finishLoading()
+    } else {
+      window.addEventListener('load', finishLoading)
+      return () => window.removeEventListener('load', finishLoading)
+    }
+  }, [])
+
   // Scroll sofort erlauben (kein Klick mehr nötig)
   useEffect(() => {
+    if (isLoading) return
+
     const timer = setTimeout(() => {
       setCanScroll(true)
       setShowScrollHint(true)
     }, 300)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [isLoading])
 
   return (
     <div className="app">
+      {showLoader && <Loader hiding={!isLoading} />}
       <HamburgerMenu onImpressumClick={() => setImpressumOpen(true)} />
       <section className="aufmacher-section" data-header-bg="light">
         <div className="welcome-container">
