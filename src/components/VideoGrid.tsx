@@ -1,34 +1,55 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import './VideoGrid.css'
 
-const ROWS = 5
-const COLS = 7
-const TOTAL_CELLS = ROWS * COLS
+const DESKTOP_ROWS = 5
+const DESKTOP_COLS = 7
+const MOBILE_ROWS = 9
+const MOBILE_COLS = 5
 
 const GRID_COLORS = ['#000000', '#E62727', '#ffffff', 'transparent']
 const SOLID_COLORS = ['#000000', '#E62727', '#ffffff']
 
-// 4. Spalte von links, 3. Zeile von oben (1-basiert)
-const FREE_CELL_INDEX = (3 - 1) * COLS + (4 - 1)
-// 3. Spalte von rechts, 3. Zeile von oben (1-basiert)
-const PULSE_TRANSPARENT_CELL_INDEX = (3 - 1) * COLS + (COLS - 3)
+function getGridDimensions(width: number) {
+  const mobile = width <= 768
+  return {
+    rows: mobile ? MOBILE_ROWS : DESKTOP_ROWS,
+    cols: mobile ? MOBILE_COLS : DESKTOP_COLS,
+  }
+}
 
-function getInitialColors(): string[] {
-  return Array.from({ length: TOTAL_CELLS }, (_, index) => {
-    if (index === FREE_CELL_INDEX) return 'transparent'
-    if (index === PULSE_TRANSPARENT_CELL_INDEX) {
+// 4. Spalte von links, 3. Zeile von oben (1-basiert)
+function getFreeCellIndex(cols: number): number {
+  return (3 - 1) * cols + (4 - 1)
+}
+
+// 9 Kästchen: Reihen 3–5 von oben, Spalten 4–6 von links (auf schmalen Grids mittlere 3)
+function getPulseCellIndices(rows: number, cols: number): number[] {
+  const pulseRows = [3, 4, 5]
+  const pulseCols = cols >= 6 ? [4, 5, 6] : [2, 3, 4]
+
+  const indices: number[] = []
+  for (const row of pulseRows) {
+    if (row > rows) continue
+    for (const col of pulseCols) {
+      if (col > cols) continue
+      indices.push((row - 1) * cols + (col - 1))
+    }
+  }
+  return indices
+}
+
+function getInitialColors(rows: number, cols: number): string[] {
+  const total = rows * cols
+  const freeIndex = getFreeCellIndex(cols)
+  const pulseIndices = new Set(getPulseCellIndices(rows, cols))
+
+  return Array.from({ length: total }, (_, index) => {
+    if (index === freeIndex) return 'transparent'
+    if (pulseIndices.has(index)) {
       return SOLID_COLORS[Math.floor(Math.random() * SOLID_COLORS.length)]
     }
     return GRID_COLORS[Math.floor(Math.random() * GRID_COLORS.length)]
   })
-}
-
-function isFreeCell(index: number): boolean {
-  return index === FREE_CELL_INDEX
-}
-
-function isPulseTransparentCell(index: number): boolean {
-  return index === PULSE_TRANSPARENT_CELL_INDEX
 }
 
 function pickNextColor(current: string): string {
@@ -42,25 +63,48 @@ function pickSolidColor(current: string): string {
 }
 
 function VideoGrid() {
-  const [cellColors, setCellColors] = useState(getInitialColors)
-  const pulseChangeCountRef = useRef(0)
+  const [gridSize, setGridSize] = useState(() =>
+    getGridDimensions(typeof window !== 'undefined' ? window.innerWidth : 1200),
+  )
+  const [cellColors, setCellColors] = useState(() =>
+    getInitialColors(gridSize.rows, gridSize.cols),
+  )
+
+  useEffect(() => {
+    const updateGridSize = () => {
+      setGridSize((prev) => {
+        const next = getGridDimensions(window.innerWidth)
+        if (prev.rows === next.rows && prev.cols === next.cols) return prev
+        return next
+      })
+    }
+
+    updateGridSize()
+    window.addEventListener('resize', updateGridSize)
+    return () => window.removeEventListener('resize', updateGridSize)
+  }, [])
+
+  useEffect(() => {
+    setCellColors(getInitialColors(gridSize.rows, gridSize.cols))
+  }, [gridSize.rows, gridSize.cols])
+
+  const freeCellIndex = getFreeCellIndex(gridSize.cols)
+  const pulseCellIndices = getPulseCellIndices(gridSize.rows, gridSize.cols)
+  const pulseCellSet = new Set(pulseCellIndices)
 
   useEffect(() => {
     const timeouts: ReturnType<typeof setTimeout>[] = []
     const intervals: ReturnType<typeof setInterval>[] = []
+    const totalCells = gridSize.rows * gridSize.cols
 
     const changeColor = (index: number) => {
-      if (isFreeCell(index)) return
+      if (index === freeCellIndex) return
 
-      if (isPulseTransparentCell(index)) {
-        pulseChangeCountRef.current += 1
+      if (pulseCellSet.has(index)) {
         setCellColors((prev) => {
           const next = [...prev]
-          if (pulseChangeCountRef.current % 2 === 0) {
-            next[index] = 'transparent'
-          } else {
-            next[index] = pickSolidColor(prev[index])
-          }
+          next[index] =
+            prev[index] === 'transparent' ? pickSolidColor(prev[index]) : 'transparent'
           return next
         })
         return
@@ -73,10 +117,14 @@ function VideoGrid() {
       })
     }
 
-    for (let index = 0; index < TOTAL_CELLS; index++) {
-      if (isFreeCell(index)) continue
-      const baseInterval = 1500 + Math.random() * 2500
-      const initialDelay = Math.random() * 2000
+    for (let index = 0; index < totalCells; index++) {
+      if (index === freeCellIndex) continue
+
+      const isPulse = pulseCellSet.has(index)
+      const baseInterval = isPulse
+        ? 700 + Math.random() * 800
+        : 1500 + Math.random() * 2500
+      const initialDelay = Math.random() * (isPulse ? 1000 : 2000)
       const first = setTimeout(() => {
         changeColor(index)
         intervals.push(setInterval(() => changeColor(index), baseInterval))
@@ -88,17 +136,24 @@ function VideoGrid() {
       timeouts.forEach((t) => clearTimeout(t))
       intervals.forEach((i) => clearInterval(i))
     }
-  }, [])
+  }, [gridSize.rows, gridSize.cols, freeCellIndex, pulseCellIndices.join(',')])
 
   return (
-    <div className="video-grid" aria-hidden="true">
+    <div
+      className="video-grid"
+      style={{
+        gridTemplateColumns: `repeat(${gridSize.cols}, 1fr)`,
+        gridTemplateRows: `repeat(${gridSize.rows}, 1fr)`,
+      }}
+      aria-hidden="true"
+    >
       {cellColors.map((color, index) => (
         <div
           key={index}
-          className={`video-grid-cell${isFreeCell(index) ? ' video-grid-cell--free' : ''}${isPulseTransparentCell(index) ? ' video-grid-cell--pulse' : ''}`}
+          className={`video-grid-cell${index === freeCellIndex ? ' video-grid-cell--free' : ''}${pulseCellSet.has(index) ? ' video-grid-cell--pulse' : ''}`}
           style={{
-            backgroundColor: isFreeCell(index) ? 'transparent' : color,
-            transition: isFreeCell(index) ? 'none' : 'background-color 1s ease-in-out',
+            backgroundColor: index === freeCellIndex ? 'transparent' : color,
+            transition: index === freeCellIndex ? 'none' : 'background-color 1s ease-in-out',
           }}
         />
       ))}
