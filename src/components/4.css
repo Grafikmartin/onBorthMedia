@@ -8,27 +8,13 @@
 
 .kontakt-wrapper {
   border-radius: 12px 12px 0 0;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 }
 
-/* Desktop: statisches Logo rechts – Spiegelung zum Hero links */
-.kontakt-logo-right {
-  display: none;
-}
-
 @media (min-width: 769px) {
-  .kontakt-wrapper .kontakt-logo-right {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 10vw;
-    transform: translateY(-50%);
-    width: 34vw;
-    height: auto;
-    z-index: 2;
-    pointer-events: none;
-    object-fit: contain;
+  .kontakt-content-scrollable {
+    max-height: calc(72vh - 12rem);
   }
 }
 
@@ -44,7 +30,9 @@
 }
 
 .kontakt-content-scrollable {
-  max-height: calc(100vh - 8rem);
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: calc(100vh - 16rem);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -58,7 +46,7 @@
 .kontakt-text {
   text-align: left;
   width: 100%;
-  padding: 0 0 var(--spacing-sm, 1rem) 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -76,6 +64,10 @@
   margin: 0;
 }
 
+.kontakt-address + .kontakt-address {
+  margin-top: 1rem;
+}
+
 .kontakt-link {
   color: var(--text-primary, #000000);
   text-decoration: none;
@@ -89,8 +81,9 @@
 .kontakt-anfahrt-btn {
   display: inline-block;
   margin-top: 1rem;
-  margin-bottom: 4rem;
+  margin-bottom: 0;
   align-self: flex-start;
+  flex-shrink: 0;
   padding: 0.6rem 1.5rem;
   background: #000000;
   border: 1px solid transparent;
@@ -141,6 +134,28 @@
   border-radius: 12px;
 }
 
+.kontakt-content .social-links-row {
+  flex-shrink: 0;
+  margin-top: 0;
+  padding: 0 0 0.5rem calc(1.85rem - 15px);
+  align-self: flex-start;
+}
+
+.kontakt-logo {
+  display: block;
+  width: 16.15vw;
+  max-width: 50%;
+  height: auto;
+  margin: 2.75rem 0 1.25rem 0;
+  pointer-events: none;
+  object-fit: contain;
+}
+
+.kontakt-content .social-links-row .social-cube-tooltip--inline {
+  color: rgba(0, 0, 0, 0.45);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
 @media (max-width: 768px) {
   .kontakt-content {
     margin-left: 10vw;
@@ -160,6 +175,19 @@
   .kontakt-anfahrt-btn {
     font-size: 0.85rem;
     padding: 0.4rem 1rem;
+  }
+
+  .kontakt-content .social-links-row {
+    padding-left: calc(1.35rem - 15px);
+  }
+
+  .kontakt-logo {
+    display: none;
+  }
+
+  .kontakt-content-scrollable {
+    max-height: none;
+    overflow: visible;
   }
 
   .kontakt-map-container {

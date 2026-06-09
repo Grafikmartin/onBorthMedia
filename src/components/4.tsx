@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import './4.css'
 import SectionDots from './SectionDots'
+import { SocialLinks } from './SocialLinks'
 import obmLogo from '../assets/OBM-Logo.svg'
 import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
 
@@ -32,33 +33,26 @@ function Four({ id }: { id?: string }) {
         }}
       >
       <SectionDots />
-      <img
-        src={obmLogo}
-        alt=""
-        className="kontakt-logo-right"
-        aria-hidden="true"
-      />
-        <div className="kontakt-content kontakt-content-scrollable">
-          <div className="kontakt-text">
+        <div className="kontakt-content">
+          <div className="kontakt-text kontakt-content-scrollable">
             <h2 className="kontakt-title">Kontakt</h2>
+            <img
+              src={obmLogo}
+              alt=""
+              className="kontakt-logo"
+              aria-hidden="true"
+            />
             <p className="kontakt-lead">
               Bereit, dein Projekt an Bord zu holen?
             </p>
             <p className="kontakt-address">
-              OnBorthMedia – Webseiten, Webapps und Design aus einer Hand.<br />
-              Batensen 4, 29562 Suhlendorf<br />
-              E-Mail: <a href="mailto:kontakt@onborthmedia.de" className="kontakt-link">kontakt@onborthmedia.de</a>
+              OnBorthMedia – Webseiten, Webapps und Design aus einer Hand.
             </p>
-            <p className="kontakt-note">
-              Erzähl uns von deinem Vorhaben – wir melden uns mit einem klaren nächsten Schritt.
+            <p className="kontakt-address">
+              Erzähl mir von deinem Vorhaben – ich melde mich mit einem klaren nächsten Schritt.
             </p>
           </div>
-          <a
-            href="mailto:kontakt@onborthmedia.de?subject=Projektanfrage%20OnBorthMedia"
-            className="kontakt-anfahrt-btn"
-          >
-            Projekt starten
-          </a>
+          <SocialLinks />
         </div>
       </div>
     </section>
