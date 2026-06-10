@@ -12,6 +12,8 @@ import pingpongVideo from '../assets/pingpong.mkv'
 import radioPulseVideo from '../assets/RadioPulse-kl.mov'
 import soundpulseImage from '../assets/soundpulse.png'
 import spaceVideo from '../assets/space.mp4'
+import tiereTeilenImage from '../assets/TiereTeilen.png'
+import vettierioAppImage from '../assets/Vettierio-app.png'
 
 export type ShowcaseItem = {
   id: string
@@ -108,17 +110,19 @@ export const WEBSITE_SHOWCASE: ShowcaseItem[] = [
   { id: 'web-bb', label: 'Benjamin Borth', video: benjaminBorthVideo },
   { id: 'web-mbsound', label: 'mb-sound', image: mbSoundImage },
   { id: 'web-architektur', label: 'Architektur M', video: architekturMVideo },
-  { id: 'web-qb', label: 'QB', video: qbVideo },
-  { id: 'web-qb-app', label: 'QB App', video: qbteil1Video, frame: 'phone' },
   { id: 'web-portfolio', label: 'Portfolio', video: portfolioVideo },
 ]
 
 export const WEBAPP_SHOWCASE: ShowcaseItem[] = [
   { id: 'app-wetter', label: 'Wetter', video: wetterVideo },
   { id: 'app-pingpong', label: 'Ping Pong', video: pingpongVideo },
+  { id: 'app-qb', label: 'QB', video: qbVideo },
+  { id: 'app-qb-app', label: 'QB App', video: qbteil1Video, frame: 'phone' },
   { id: 'app-soundpulse', label: 'SoundPulse', image: soundpulseImage, frame: 'phone' },
   { id: 'app-radio', label: 'Radio Pulse', video: radioPulseVideo },
   { id: 'app-space', label: 'Space', video: spaceVideo },
+  { id: 'app-tiere-teilen', label: 'Tiere teilen', image: tiereTeilenImage },
+  { id: 'app-vettierio', label: 'Vettierio', image: vettierioAppImage, frame: 'phone' },
 ]
 
 export default ShowcaseSlider

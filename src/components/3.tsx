@@ -1,8 +1,61 @@
 import { useState, useEffect, useRef } from 'react'
 import './3.css'
 import SectionDots from './SectionDots'
-import webdesignImage from '../assets/Webdesign-quer.jpg'
+import webdesignImage from '../assets/Webdesign-quer copy.jpg'
+import soundPulseLogo from '../assets/logos-design/SoundPulse_green.png'
+import goPresseLogo from '../assets/logos-design/go-presse.png'
+import architekturMLogo from '../assets/logos-design/logo-architektur_m.svg'
+import getwizeLogo from '../assets/logos-design/Logo_GETWIZE.svg'
+import qbLogo from '../assets/logos-design/QB-Logo.png'
+import aretoLogo from '../assets/logos-design/areto-group-blau.svg'
+import vettierioLogo from '../assets/logos-design/vettierio.svg'
 import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
+
+const DESIGN_LOGOS = [
+  soundPulseLogo,
+  goPresseLogo,
+  architekturMLogo,
+  getwizeLogo,
+  qbLogo,
+  aretoLogo,
+  vettierioLogo,
+]
+
+const LOGO_HOLD_MS = 2200
+const LOGO_FADE_MS = 900
+
+function DesignLogoCycle() {
+  const [index, setIndex] = useState(0)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const fadeInTimer = window.setTimeout(() => setVisible(true), 50)
+
+    const cycleTimer = window.setInterval(() => {
+      setVisible(false)
+      window.setTimeout(() => {
+        setIndex((current) => (current + 1) % DESIGN_LOGOS.length)
+        setVisible(true)
+      }, LOGO_FADE_MS)
+    }, LOGO_HOLD_MS + LOGO_FADE_MS)
+
+    return () => {
+      window.clearTimeout(fadeInTimer)
+      window.clearInterval(cycleTimer)
+    }
+  }, [])
+
+  return (
+    <div className="about-logo-cycle" aria-hidden="true">
+      <img
+        src={DESIGN_LOGOS[index]}
+        alt=""
+        className={`about-logo-cycle-img${visible ? ' visible' : ''}`}
+        loading="lazy"
+      />
+    </div>
+  )
+}
 
 function Three({ id }: { id?: string }) {
   const [visibleParagraphs, setVisibleParagraphs] = useState<boolean[]>([false, false, false])
@@ -82,9 +135,6 @@ function Three({ id }: { id?: string }) {
         }}
       >
       <SectionDots />
-      <div className="about-image-wrap">
-        <img src={webdesignImage} alt="" className="about-image" loading="lazy" />
-      </div>
       <div className="about-content about-content-scrollable">
         <div className="about-text">
           <h2 className="about-title">Design</h2>
@@ -106,6 +156,12 @@ function Three({ id }: { id?: string }) {
         >
           Von Logoentwicklung über Styleguides bis zur konsistenten Umsetzung in Web und Print – alles aus einer Hand.
         </p>
+        <div className="about-images-row">
+          <div className="about-image-wrap">
+            <img src={webdesignImage} alt="" className="about-image" loading="lazy" />
+          </div>
+          <DesignLogoCycle />
+        </div>
       </div>
       </div>
       </div>
