@@ -9,7 +9,18 @@ import getwizeLogo from '../assets/logos-design/Logo_GETWIZE.svg'
 import qbLogo from '../assets/logos-design/QB-Logo.png'
 import aretoLogo from '../assets/logos-design/areto-group-blau.svg'
 import vettierioLogo from '../assets/logos-design/vettierio.svg'
+import lisftschaenkeLogo from '../assets/logos-design/lisftschaenke.png'
 import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
+
+const iconModules = import.meta.glob('../assets/icons/*positiv*.png', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>
+
+const DESIGN_ICONS = Object.keys(iconModules)
+  .filter((path) => /positiv/i.test(path) && !/negativ/i.test(path))
+  .sort()
+  .map((path) => iconModules[path])
 
 const DESIGN_LOGOS = [
   soundPulseLogo,
@@ -19,10 +30,100 @@ const DESIGN_LOGOS = [
   qbLogo,
   aretoLogo,
   vettierioLogo,
+  lisftschaenkeLogo,
 ]
 
-const LOGO_HOLD_MS = 2200
-const LOGO_FADE_MS = 900
+const LOGO_HOLD_MS = 700
+const LOGO_FADE_MS = 250
+const ICON_HOLD_MS = 700
+const ICON_FADE_MS = 250
+
+function pickNextIconIndex(currentIndices: number[], nextRef: { current: number }) {
+  if (DESIGN_ICONS.length <= 3) {
+    const index = nextRef.current % DESIGN_ICONS.length
+    nextRef.current += 1
+    return index
+  }
+
+  for (let offset = 0; offset < DESIGN_ICONS.length; offset += 1) {
+    const candidate = (nextRef.current + offset) % DESIGN_ICONS.length
+    if (!currentIndices.includes(candidate)) {
+      nextRef.current = candidate + 1
+      return candidate
+    }
+  }
+
+  const fallback = nextRef.current % DESIGN_ICONS.length
+  nextRef.current += 1
+  return fallback
+}
+
+function DesignIconCycle() {
+  const [indices, setIndices] = useState([0, 1, 2])
+  const [visible, setVisible] = useState([false, false, false])
+  const nextIconRef = useRef(3)
+  const slotRef = useRef(0)
+
+  useEffect(() => {
+    if (DESIGN_ICONS.length < 3) return
+
+    const timers: number[] = []
+    const schedule = (fn: () => void, delay: number) => {
+      timers.push(window.setTimeout(fn, delay))
+    }
+
+    schedule(() => setVisible([true, true, true]), 50)
+
+    const cycle = () => {
+      const slot = slotRef.current % 3
+      slotRef.current += 1
+
+      setVisible((prev) => {
+        const next = [...prev]
+        next[slot] = false
+        return next
+      })
+
+      schedule(() => {
+        setIndices((prev) => {
+          const next = [...prev]
+          next[slot] = pickNextIconIndex(prev, nextIconRef)
+          return next
+        })
+        setVisible((prev) => {
+          const next = [...prev]
+          next[slot] = true
+          return next
+        })
+      }, ICON_FADE_MS)
+    }
+
+    const cycleTimer = window.setInterval(cycle, ICON_HOLD_MS + ICON_FADE_MS)
+
+    return () => {
+      window.clearInterval(cycleTimer)
+      timers.forEach((id) => window.clearTimeout(id))
+    }
+  }, [])
+
+  if (DESIGN_ICONS.length < 3) return null
+
+  return (
+    <div className="about-icon-cycle" aria-hidden="true">
+      <div className="about-icon-cycle-slots">
+        {indices.map((iconIndex, slot) => (
+          <img
+            key={slot}
+            src={DESIGN_ICONS[iconIndex]}
+            alt=""
+            className={`about-icon-cycle-img${visible[slot] ? ' visible' : ''}`}
+            loading="lazy"
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 function DesignLogoCycle() {
   const [index, setIndex] = useState(0)
@@ -157,10 +258,11 @@ function Three({ id }: { id?: string }) {
           Von Logoentwicklung über Styleguides bis zur konsistenten Umsetzung in Web und Print – alles aus einer Hand.
         </p>
         <div className="about-images-row">
+          <DesignLogoCycle />
           <div className="about-image-wrap">
             <img src={webdesignImage} alt="" className="about-image" loading="lazy" />
           </div>
-          <DesignLogoCycle />
+          <DesignIconCycle />
         </div>
       </div>
       </div>
