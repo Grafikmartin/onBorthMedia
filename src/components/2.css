@@ -61,6 +61,35 @@
   display: none;
 }
 
+/* Webapps-Beispiele: nur die Karten selbst weiß, damit --farbe-1 nicht durchschimmert */
+.leistungen-text .showcase-slider--dark .showcase-slider-card {
+  background: var(--farbe-2);
+  border-color: color-mix(in srgb, var(--farbe-1) 12%, transparent);
+}
+
+.leistungen-text .showcase-slider--dark .showcase-slider-card-chrome {
+  background: color-mix(in srgb, var(--farbe-1) 4%, var(--farbe-2));
+  border-bottom-color: color-mix(in srgb, var(--farbe-1) 8%, var(--farbe-2));
+}
+
+.leistungen-text .showcase-slider--dark .showcase-slider-card-dot {
+  background: color-mix(in srgb, var(--farbe-1) 15%, transparent);
+}
+
+.leistungen-text .showcase-slider--dark .showcase-slider-card-preview {
+  background: var(--farbe-2);
+}
+
+.leistungen-text .showcase-slider--dark .showcase-phone-frame {
+  border-color: color-mix(in srgb, var(--farbe-1) 12%, transparent);
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--farbe-1) 4%, var(--farbe-2)) 0%,
+    var(--farbe-2) 38%,
+    color-mix(in srgb, var(--farbe-1) 8%, var(--farbe-2)) 100%
+  );
+}
+
 @media (max-width: 768px) {
   .leistungen-text {
     left: 10vw;

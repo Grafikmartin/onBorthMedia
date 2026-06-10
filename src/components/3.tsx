@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './3.css'
 import SectionDots from './SectionDots'
+import webdesignImage from '../assets/Webdesign-quer.jpg'
 import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
 
 function Three({ id }: { id?: string }) {
@@ -81,6 +82,9 @@ function Three({ id }: { id?: string }) {
         }}
       >
       <SectionDots />
+      <div className="about-image-wrap">
+        <img src={webdesignImage} alt="" className="about-image" loading="lazy" />
+      </div>
       <div className="about-content about-content-scrollable">
         <div className="about-text">
           <h2 className="about-title">Design</h2>

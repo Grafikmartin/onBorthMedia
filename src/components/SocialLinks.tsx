@@ -16,7 +16,7 @@ export function SocialLinks({ layout = 'inline' }: SocialLinksProps) {
   return (
     <div className={wrapperClass}>
       <SocialCubeButton
-        href="mailto:kontakt@onborthmedia.de?subject=Projektanfrage%20OnBorthMedia"
+        href="mailto:hello@onborthmedia.de?subject=Projektanfrage%20OnBorthMedia"
         label="E-Mail"
         position="left"
         external={false}

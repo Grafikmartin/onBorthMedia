@@ -9,6 +9,24 @@
 .about-wrapper {
   border-radius: 12px 12px 0 0;
   overflow: hidden;
+  position: relative;
+}
+
+.about-image-wrap {
+  position: absolute;
+  top: var(--spacing-xl, 4rem);
+  right: 2rem;
+  width: min(16vw, 200px);
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.about-image {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .about-spacer {
@@ -96,6 +114,10 @@
 }
 
 @media (max-width: 768px) {
+  .about-image-wrap {
+    display: none;
+  }
+
   .about-content {
     margin-left: 10vw;
     width: 80vw;
