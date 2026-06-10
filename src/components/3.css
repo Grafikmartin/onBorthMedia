@@ -15,12 +15,19 @@
 .about-images-row {
   display: flex;
   align-items: stretch;
-  gap: 1rem;
+  gap: 0.9rem;
   margin-top: 1.5rem;
+  max-width: 100%;
+}
+
+.about-image-wrap,
+.about-logo-cycle,
+.about-icon-cycle {
+  border: 1px solid var(--farbe-1);
+  width: min(14.4vw, 180px);
 }
 
 .about-image-wrap {
-  width: min(16vw, 200px);
   aspect-ratio: 16 / 9;
   flex-shrink: 0;
   border-radius: 12px;
@@ -28,11 +35,10 @@
 }
 
 .about-logo-cycle {
-  width: min(16vw, 200px);
   aspect-ratio: 16 / 9;
   flex-shrink: 0;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--farbe-2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,11 +62,10 @@
 }
 
 .about-icon-cycle {
-  width: min(16vw, 200px);
   aspect-ratio: 16 / 9;
   flex-shrink: 0;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--farbe-2);
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -142,7 +147,9 @@
 .about-text {
   text-align: left;
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .more-button {

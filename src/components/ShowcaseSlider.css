@@ -42,7 +42,7 @@
   align-items: center;
   gap: 0.25rem;
   padding: 0.35rem 0.45rem;
-  background: color-mix(in srgb, var(--farbe-1) 4%, transparent);
+  background: var(--farbe-2);
   border-bottom: 1px solid color-mix(in srgb, var(--farbe-1) 6%, transparent);
 }
 
@@ -56,7 +56,7 @@
 .showcase-slider-card-preview {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: linear-gradient(160deg, var(--color-surface) 0%, color-mix(in srgb, var(--farbe-1) 12%, var(--farbe-2)) 100%);
+  background: var(--farbe-2);
 }
 
 .showcase-slider-card-video,
@@ -91,12 +91,7 @@
   padding: 0.22em 0.18em 0.2em;
   border-radius: 1.55em;
   border: 1px solid var(--border-on-light);
-  background: linear-gradient(
-    155deg,
-    color-mix(in srgb, var(--farbe-1) 4%, var(--farbe-2)) 0%,
-    var(--farbe-2) 38%,
-    color-mix(in srgb, var(--farbe-1) 8%, var(--farbe-2)) 100%
-  );
+  background: var(--farbe-2);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, var(--farbe-2) 14%, transparent),
     0 0.35rem 0.65rem color-mix(in srgb, var(--farbe-1) 6%, transparent);

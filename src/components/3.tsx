@@ -22,15 +22,15 @@ const DESIGN_ICONS = Object.keys(iconModules)
   .sort()
   .map((path) => iconModules[path])
 
-const DESIGN_LOGOS = [
-  soundPulseLogo,
-  goPresseLogo,
-  architekturMLogo,
-  getwizeLogo,
-  qbLogo,
-  aretoLogo,
-  vettierioLogo,
-  lisftschaenkeLogo,
+const DESIGN_LOGOS: { src: string; bg?: string }[] = [
+  { src: soundPulseLogo },
+  { src: goPresseLogo },
+  { src: architekturMLogo },
+  { src: getwizeLogo },
+  { src: qbLogo, bg: '#f2f2f2' },
+  { src: aretoLogo },
+  { src: vettierioLogo },
+  { src: lisftschaenkeLogo, bg: '#000000' },
 ]
 
 const LOGO_HOLD_MS = 700
@@ -146,10 +146,16 @@ function DesignLogoCycle() {
     }
   }, [])
 
+  const currentLogo = DESIGN_LOGOS[index]
+
   return (
-    <div className="about-logo-cycle" aria-hidden="true">
+    <div
+      className="about-logo-cycle"
+      style={currentLogo.bg ? { background: currentLogo.bg, borderColor: currentLogo.bg } : undefined}
+      aria-hidden="true"
+    >
       <img
-        src={DESIGN_LOGOS[index]}
+        src={currentLogo.src}
         alt=""
         className={`about-logo-cycle-img${visible ? ' visible' : ''}`}
         loading="lazy"
@@ -226,7 +232,7 @@ function Three({ id }: { id?: string }) {
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'flex-start',
-          backgroundColor: 'var(--color-surface)',
+          backgroundColor: 'var(--farbe-2)',
           padding: 'var(--spacing-xl, 4rem) 0',
           transform: isSticky ? 'none' : `scale(${scale})`,
           transformOrigin: 'top center',

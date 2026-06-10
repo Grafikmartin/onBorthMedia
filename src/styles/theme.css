@@ -7,7 +7,7 @@
   /* === Kernfarben === */
   --farbe-1: #362D2A;        /* Dark – Typo auf hellem Grund, dunkle Flächen */
   --farbe-2: #ffffff;        /* Bright – Typo auf dunklem Grund, helle Flächen */
-  --farbe-primary: #2498DC;  /* Primary – Akzente, Hover, Markenpunkte */
+  --farbe-primary: #62C5FF;  /* Primary – Akzente, Hover, Markenpunkte */
 
   /* === Semantische Aliase === */
   --color-dark: var(--farbe-1);
@@ -26,7 +26,7 @@
   --bg-dark: var(--farbe-1);
   --bg-light: var(--farbe-2);
   --bg-dark-muted: color-mix(in srgb, var(--farbe-1) 93%, var(--farbe-2) 7%);
-  --color-surface: color-mix(in srgb, var(--farbe-1) 4%, var(--farbe-2) 96%);
+  --color-surface: var(--farbe-2);
 
   /* Primary-Ableitungen */
   --color-signal: var(--farbe-primary);
