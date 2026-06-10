@@ -10,6 +10,7 @@ import qbLogo from '../assets/logos-design/QB-Logo.png'
 import aretoLogo from '../assets/logos-design/areto-group-blau.svg'
 import vettierioLogo from '../assets/logos-design/vettierio.svg'
 import lisftschaenkeLogo from '../assets/logos-design/lisftschaenke.png'
+import gapLogo from '../assets/logos-design/GAP.webp'
 import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
 
 const iconModules = import.meta.glob('../assets/icons/*positiv*.png', {
@@ -22,7 +23,7 @@ const DESIGN_ICONS = Object.keys(iconModules)
   .sort()
   .map((path) => iconModules[path])
 
-const DESIGN_LOGOS: { src: string; bg?: string }[] = [
+const DESIGN_LOGOS: { src: string; bg?: string; large?: boolean }[] = [
   { src: soundPulseLogo },
   { src: goPresseLogo },
   { src: architekturMLogo },
@@ -31,6 +32,7 @@ const DESIGN_LOGOS: { src: string; bg?: string }[] = [
   { src: aretoLogo },
   { src: vettierioLogo },
   { src: lisftschaenkeLogo, bg: '#000000' },
+  { src: gapLogo, large: true },
 ]
 
 const LOGO_HOLD_MS = 700
@@ -150,14 +152,14 @@ function DesignLogoCycle() {
 
   return (
     <div
-      className="about-logo-cycle"
-      style={currentLogo.bg ? { background: currentLogo.bg, borderColor: currentLogo.bg } : undefined}
+      className={`about-logo-cycle${currentLogo.large ? ' about-logo-cycle--large' : ''}`}
+      style={currentLogo.bg ? { background: currentLogo.bg } : undefined}
       aria-hidden="true"
     >
       <img
         src={currentLogo.src}
         alt=""
-        className={`about-logo-cycle-img${visible ? ' visible' : ''}`}
+        className={`about-logo-cycle-img${currentLogo.large ? ' about-logo-cycle-img--large' : ''}${visible ? ' visible' : ''}`}
         loading="lazy"
       />
     </div>
