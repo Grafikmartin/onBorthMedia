@@ -8,10 +8,10 @@ const I_DOT_PATH =
 
 const DOT_CX = 259.334
 const DOT_CY = 13.35
-const HEARTBEAT_BPM = 72
+const HEARTBEAT_BPM = 56
 const HEARTBEAT_CYCLE_MS = Math.round(60000 / HEARTBEAT_BPM)
-const LUB_DUB_GAP_MS = 130
-const PULSE_MS = 280
+const LUB_DUB_GAP_MS = 155
+const PULSE_MS = 320
 
 type ExitDot = {
   color: string
