@@ -21,6 +21,7 @@ export function SocialLinks({ layout = 'inline' }: SocialLinksProps) {
         position="left"
         external={false}
         inline={isInline}
+        accentArrows
       >
         <FontAwesomeIcon icon={faEnvelope} />
       </SocialCubeButton>

@@ -10,6 +10,22 @@ type SocialCubeButtonProps = {
   children: ReactNode
   external?: boolean
   inline?: boolean
+  accentArrows?: boolean
+}
+
+function AccentArrow() {
+  return (
+    <svg width="42" height="52" viewBox="0 0 12 20" aria-hidden="true">
+      <path
+        d="M6 1.5V13.5M2.5 10L6 15.5L9.5 10"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
 }
 
 export function SocialCubeButton({
@@ -19,6 +35,7 @@ export function SocialCubeButton({
   children,
   external = true,
   inline = false,
+  accentArrows = false,
 }: SocialCubeButtonProps) {
   const containerClass = inline
     ? 'social-cube-container social-cube-container--inline'
@@ -29,8 +46,13 @@ export function SocialCubeButton({
     : `social-cube-tooltip social-cube-tooltip--${position}`
 
   return (
-    <div className="social-cube-item">
+    <div className={`social-cube-item${accentArrows ? ' social-cube-item--accent' : ''}`}>
       <div className={containerClass}>
+        {accentArrows && (
+          <span className="social-cube-arrow social-cube-arrow--top" aria-hidden="true">
+            <AccentArrow />
+          </span>
+        )}
         <ul className="social-icons">
           <li>
             <a

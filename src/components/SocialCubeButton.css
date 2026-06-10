@@ -1,3 +1,35 @@
+@keyframes social-arrow-blink {
+  0%,
+  58% {
+    opacity: 0;
+  }
+
+  79% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Pfeil über der oberen Fläche – absolut, verschiebt den Button nicht */
+.social-cube-item--accent .social-cube-container {
+  overflow: visible;
+}
+
+.social-cube-item--accent .social-cube-arrow--top {
+  position: absolute;
+  left: 40px;
+  top: -54px;
+  display: flex;
+  color: var(--farbe-primary);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 5;
+  animation: social-arrow-blink 4s ease-in-out infinite;
+}
+
 .social-icons {
   position: relative;
   margin: 0;
@@ -214,20 +246,28 @@
 
 .social-links-row .social-cube-tooltip--inline {
   position: absolute;
-  top: auto;
-  right: auto;
   left: 50%;
-  bottom: calc(38px + 0.3rem);
+  top: calc(100% + 2.75rem);
   transform: translateX(-50%);
+  padding: 0;
+  border: none;
+  font-size: 14px;
   opacity: 0;
   color: rgba(255, 255, 255, 0.65);
-  border-color: rgba(255, 255, 255, 0.35);
+  transition: opacity 1.8s ease;
   pointer-events: none;
   white-space: nowrap;
 }
 
 .social-links-row .social-cube-item:hover .social-cube-tooltip--inline {
   opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-cube-arrow {
+    animation: none;
+    opacity: 0.65;
+  }
 }
 
 @media (max-width: 768px) {
@@ -247,7 +287,6 @@
 
   .social-links-row .social-cube-item {
     width: 64px;
-    height: 70px;
   }
 
   .social-links-row .social-cube-container--inline {
@@ -255,6 +294,7 @@
   }
 
   .social-links-row .social-cube-tooltip--inline {
-    bottom: calc(33px + 0.3rem);
+    top: calc(100% + 2.5rem);
+    font-size: 12px;
   }
 }
