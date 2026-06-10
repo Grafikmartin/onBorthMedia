@@ -13,15 +13,14 @@ import lisftschaenkeLogo from '../assets/logos-design/lisftschaenke.png'
 import gapLogo from '../assets/logos-design/GAP.webp'
 import { useSectionScrollStack } from '../hooks/useSectionScrollStack'
 
-const iconModules = import.meta.glob('../assets/icons/*positiv*.png', {
+const printModules = import.meta.glob('../assets/PrintDesigns/*.{png,jpg,jpeg,webp}', {
   eager: true,
   import: 'default',
 }) as Record<string, string>
 
-const DESIGN_ICONS = Object.keys(iconModules)
-  .filter((path) => /positiv/i.test(path) && !/negativ/i.test(path))
+const PRINT_DESIGNS = Object.keys(printModules)
   .sort()
-  .map((path) => iconModules[path])
+  .map((path) => printModules[path])
 
 const DESIGN_LOGOS: { src: string; bg?: string; large?: boolean }[] = [
   { src: soundPulseLogo },
@@ -35,133 +34,169 @@ const DESIGN_LOGOS: { src: string; bg?: string; large?: boolean }[] = [
   { src: gapLogo, large: true },
 ]
 
-const LOGO_HOLD_MS = 700
-const LOGO_FADE_MS = 250
-const ICON_HOLD_MS = 700
-const ICON_FADE_MS = 250
+const LOGO_HOLD_MS = 3200
+const LOGO_FADE_MS = 1400
+const PRINT_HOLD_MS = 6500
+const PRINT_FADE_MS = 1200
 
-function pickNextIconIndex(currentIndices: number[], nextRef: { current: number }) {
-  if (DESIGN_ICONS.length <= 3) {
-    const index = nextRef.current % DESIGN_ICONS.length
-    nextRef.current += 1
-    return index
-  }
+type PrintOrientation = 'landscape' | 'portrait'
 
-  for (let offset = 0; offset < DESIGN_ICONS.length; offset += 1) {
-    const candidate = (nextRef.current + offset) % DESIGN_ICONS.length
-    if (!currentIndices.includes(candidate)) {
-      nextRef.current = candidate + 1
-      return candidate
-    }
-  }
-
-  const fallback = nextRef.current % DESIGN_ICONS.length
-  nextRef.current += 1
-  return fallback
-}
-
-function DesignIconCycle() {
-  const [indices, setIndices] = useState([0, 1, 2])
-  const [visible, setVisible] = useState([false, false, false])
-  const nextIconRef = useRef(3)
-  const slotRef = useRef(0)
+function usePrintOrientations() {
+  const [orientations, setOrientations] = useState<PrintOrientation[]>([])
 
   useEffect(() => {
-    if (DESIGN_ICONS.length < 3) return
+    let cancelled = false
 
-    const timers: number[] = []
-    const schedule = (fn: () => void, delay: number) => {
-      timers.push(window.setTimeout(fn, delay))
-    }
-
-    schedule(() => setVisible([true, true, true]), 50)
-
-    const cycle = () => {
-      const slot = slotRef.current % 3
-      slotRef.current += 1
-
-      setVisible((prev) => {
-        const next = [...prev]
-        next[slot] = false
-        return next
-      })
-
-      schedule(() => {
-        setIndices((prev) => {
-          const next = [...prev]
-          next[slot] = pickNextIconIndex(prev, nextIconRef)
-          return next
-        })
-        setVisible((prev) => {
-          const next = [...prev]
-          next[slot] = true
-          return next
-        })
-      }, ICON_FADE_MS)
-    }
-
-    const cycleTimer = window.setInterval(cycle, ICON_HOLD_MS + ICON_FADE_MS)
+    Promise.all(
+      PRINT_DESIGNS.map(
+        (src) =>
+          new Promise<PrintOrientation>((resolve) => {
+            const img = new Image()
+            img.onload = () => {
+              resolve(img.naturalHeight > img.naturalWidth ? 'portrait' : 'landscape')
+            }
+            img.onerror = () => resolve('landscape')
+            img.src = src
+          }),
+      ),
+    ).then((result) => {
+      if (!cancelled) setOrientations(result)
+    })
 
     return () => {
-      window.clearInterval(cycleTimer)
-      timers.forEach((id) => window.clearTimeout(id))
+      cancelled = true
     }
   }, [])
 
-  if (DESIGN_ICONS.length < 3) return null
+  return orientations
+}
+
+function getPrintPanClass(orientation: PrintOrientation, index: number) {
+  const reverse = index % 2 === 1
+  if (orientation === 'portrait') {
+    return reverse ? 'about-print-cycle-layer--pan-bt' : 'about-print-cycle-layer--pan-tb'
+  }
+  return reverse ? 'about-print-cycle-layer--pan-rl' : 'about-print-cycle-layer--pan-lr'
+}
+
+function useCrossfadeCycle(length: number, holdMs: number, fadeMs: number) {
+  const [baseIndex, setBaseIndex] = useState(0)
+  const [topIndex, setTopIndex] = useState<number | null>(null)
+  const [topVisible, setTopVisible] = useState(false)
+  const baseIndexRef = useRef(0)
+
+  useEffect(() => {
+    baseIndexRef.current = baseIndex
+  }, [baseIndex])
+
+  useEffect(() => {
+    if (length <= 1) return
+
+    let fadeTimeout: number | undefined
+
+    const cycleTimer = window.setInterval(() => {
+      const nextIndex = (baseIndexRef.current + 1) % length
+      setTopIndex(nextIndex)
+      setTopVisible(false)
+
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => setTopVisible(true))
+      })
+
+      fadeTimeout = window.setTimeout(() => {
+        setBaseIndex(nextIndex)
+        baseIndexRef.current = nextIndex
+        setTopIndex(null)
+        setTopVisible(false)
+      }, fadeMs)
+    }, holdMs + fadeMs)
+
+    return () => {
+      window.clearInterval(cycleTimer)
+      if (fadeTimeout) window.clearTimeout(fadeTimeout)
+    }
+  }, [length, holdMs, fadeMs])
+
+  return { baseIndex, topIndex, topVisible }
+}
+
+function DesignPrintCycle() {
+  const orientations = usePrintOrientations()
+  const { baseIndex, topIndex, topVisible } = useCrossfadeCycle(
+    PRINT_DESIGNS.length,
+    PRINT_HOLD_MS,
+    PRINT_FADE_MS,
+  )
+
+  useEffect(() => {
+    PRINT_DESIGNS.forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
+
+  if (PRINT_DESIGNS.length === 0) return null
+
+  const renderLayer = (imageIndex: number) => {
+    const orientation = orientations[imageIndex] ?? 'landscape'
+    const panClass = getPrintPanClass(orientation, imageIndex)
+
+    return (
+      <div className={`about-print-cycle-layer ${panClass}`}>
+        <img src={PRINT_DESIGNS[imageIndex]} alt="" className="about-print-cycle-img" loading="lazy" />
+      </div>
+    )
+  }
 
   return (
-    <div className="about-icon-cycle" aria-hidden="true">
-      <div className="about-icon-cycle-slots">
-        {indices.map((iconIndex, slot) => (
-          <img
-            key={slot}
-            src={DESIGN_ICONS[iconIndex]}
-            alt=""
-            className={`about-icon-cycle-img${visible[slot] ? ' visible' : ''}`}
-            loading="lazy"
-          />
-        ))}
+    <div className="about-print-cycle" aria-hidden="true">
+      <div className="about-print-cycle-layer-wrap about-print-cycle-layer-wrap--base">
+        {renderLayer(baseIndex)}
       </div>
+      {topIndex !== null && (
+        <div className={`about-print-cycle-layer-wrap about-print-cycle-layer-wrap--top${topVisible ? ' visible' : ''}`}>
+          {renderLayer(topIndex)}
+        </div>
+      )}
     </div>
   )
 }
 
 function DesignLogoCycle() {
-  const [index, setIndex] = useState(0)
-  const [visible, setVisible] = useState(false)
+  const { baseIndex, topIndex, topVisible } = useCrossfadeCycle(
+    DESIGN_LOGOS.length,
+    LOGO_HOLD_MS,
+    LOGO_FADE_MS,
+  )
 
-  useEffect(() => {
-    const fadeInTimer = window.setTimeout(() => setVisible(true), 50)
+  const renderLayer = (logoIndex: number) => {
+    const logo = DESIGN_LOGOS[logoIndex]
 
-    const cycleTimer = window.setInterval(() => {
-      setVisible(false)
-      window.setTimeout(() => {
-        setIndex((current) => (current + 1) % DESIGN_LOGOS.length)
-        setVisible(true)
-      }, LOGO_FADE_MS)
-    }, LOGO_HOLD_MS + LOGO_FADE_MS)
-
-    return () => {
-      window.clearTimeout(fadeInTimer)
-      window.clearInterval(cycleTimer)
-    }
-  }, [])
-
-  const currentLogo = DESIGN_LOGOS[index]
+    return (
+      <div
+        className="about-logo-cycle-layer"
+        style={logo.bg ? { background: logo.bg } : undefined}
+      >
+        <img
+          src={logo.src}
+          alt=""
+          className={`about-logo-cycle-img${logo.large ? ' about-logo-cycle-img--large' : ''}`}
+          loading="lazy"
+        />
+      </div>
+    )
+  }
 
   return (
-    <div
-      className={`about-logo-cycle${currentLogo.large ? ' about-logo-cycle--large' : ''}`}
-      style={currentLogo.bg ? { background: currentLogo.bg } : undefined}
-      aria-hidden="true"
-    >
-      <img
-        src={currentLogo.src}
-        alt=""
-        className={`about-logo-cycle-img${currentLogo.large ? ' about-logo-cycle-img--large' : ''}${visible ? ' visible' : ''}`}
-        loading="lazy"
-      />
+    <div className="about-logo-cycle" aria-hidden="true">
+      <div className="about-logo-cycle-layer-wrap about-logo-cycle-layer-wrap--base">
+        {renderLayer(baseIndex)}
+      </div>
+      {topIndex !== null && (
+        <div className={`about-logo-cycle-layer-wrap about-logo-cycle-layer-wrap--top${topVisible ? ' visible' : ''}`}>
+          {renderLayer(topIndex)}
+        </div>
+      )}
     </div>
   )
 }
@@ -270,7 +305,7 @@ function Three({ id }: { id?: string }) {
           <div className="about-image-wrap">
             <img src={webdesignImage} alt="" className="about-image" loading="lazy" />
           </div>
-          <DesignIconCycle />
+          <DesignPrintCycle />
         </div>
       </div>
       </div>
